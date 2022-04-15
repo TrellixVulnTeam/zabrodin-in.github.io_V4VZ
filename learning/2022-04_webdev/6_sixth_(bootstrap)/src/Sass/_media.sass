@@ -1,0 +1,227 @@
+@media (max-width: 1200px)
+    .menu
+        padding: 17px 30px
+        &_item
+            font-size: 11px
+    .promo
+        &_h1
+            font-size: 50px
+    .reason
+        &_subscr, &_items
+            margin-top: 20px
+        &_round
+            margin-left: 140px
+        &_subscr2
+            width: 500px
+        &_p35
+            margin-top: 0
+        .row
+            &:first-child
+                margin-top: 20px
+    .mobile
+        &_back, &_bg
+            width: 300px
+    .footer
+        .social
+            margin: 0 0 15px 0
+            display: flex
+            justify-content: center
+        .links
+            padding: 35px 0 15px 0
+        .stores
+            margin: 0px 0 20px 0
+
+@media (max-width: 767px)
+    .menu
+        padding: 13px 30px
+        position: fixed
+        top: 0
+        left: -100%
+        padding: 20px 30px
+        flex-direction: column
+        width: 50%
+        height: 100%
+        background-color: rgba(0, 0, 0, .85)
+        align-items: center
+        justify-content: center
+        transition: 0.7s all
+        &_item, &_item2
+            font-size: 14px
+            margin-bottom: 10px
+        &_active
+            left: 0
+    .hamburger
+        display: block
+        position: absolute
+        right: 10px
+        top: 50%
+        transform: translateY(-50%)
+        cursor: pointer
+        height: 12px
+        span
+            display: block
+            width: 25px
+            height: 1px
+            background-color: #fff
+            margin-bottom: 3px
+            transition: 0.5s all
+            &:nth-child(3)
+                margin-bottom: 0
+        &_active
+            span
+                margin-bottom: -1px
+                &:nth-child(1)
+                    transform: translateY(6px) rotate(-45deg)
+                &:nth-child(2)
+                    display: none
+                &:nth-child(3)
+                    transform: translateY(6px) rotate(45deg)
+    .xs-hidden
+        display: none
+    .xs-visible
+        display: block
+    .subheader
+        &_phone
+            font-size: 16px
+            font-weight: 400
+            font-style: normal
+            letter-spacing: normal
+            text-align: center
+            text-transform: uppercase
+            text-align: center
+        &_btn
+            width: 180px
+            height: 40px
+            font-size: 16px
+            font-weight: 400
+            margin: 0 auto
+            display: block
+            margin-top: 5px
+        &_logo, &_official
+            margin-left: 10px
+    .promo
+        &_h1
+            font-size: 44px
+            margin: 170px 0 15px 0
+        &_btn
+            margin-top: 50px
+            margin-bottom: 70px
+    .reason
+        &_round
+            margin: 0
+            width: 65px
+            height: 65px
+            img
+                width: 60%
+        &_subscr2
+            width: 100%
+            font-size: 13px
+        &_header
+            font-size: 32px
+    .mobile
+        &_back
+            height: 260px
+            width: 250px
+        &_item
+            height: 260px
+        &_bg
+            width: 100%
+        &_text
+            width: 250px
+            font-size: 16px
+            margin: 45px auto
+        &_icon
+            top: 167px
+            left: 50%
+            transform: translateX(-50%)
+    .black
+        h2
+            font-size: 30px
+        h3
+            font-size: 12px
+        .car
+            width: 100%
+    .footer
+        .stores
+            justify-content: center
+
+@media (max-width: 575px)
+    .menu
+        width: 80%
+    .subheader
+        height: 60px
+        &_logo
+            margin-top: 15px
+        &_official
+            display: none
+        &_call
+            font-size: 12px
+        &_btn
+            width: 110px
+            height: 22px
+            font-size: 10px
+    .promo
+        min-height: 400px
+        h1
+            font-size: 30px
+            margin-bottom: 30px
+        h2
+            font-size: 20px
+        p
+            display: none
+        &_btn
+            margin-bottom: 35px
+            margin-top: 72px
+            width: 210px
+            height: 50px
+            font-size: 16px
+    .reason
+        padding: 16px
+        .container
+            padding: 0px
+        &_p40, &_p35
+            margin: 0px
+        &_round
+            width: 100px
+            height: 100px
+            margin: 0 auto
+            img
+                width: 50pt
+        &_header
+            font-size: 14px
+            margin-top: 15px
+            font-weight: 700
+        &_items
+            margin-top: 22px
+        &_subscr
+            margin-top: 27px
+        &_subscr2
+            font-size: 15px
+            margin-top: 0
+            span
+                font-size: 16px
+    .mobile
+        background: none
+        padding-bottom: 40px
+        h2
+            line-height: normal
+            font-size: 16px
+        h5
+            font-size: 14px
+            margin-top: 11px
+            margin-bottom: 0
+        &_item
+            margin-top: 30px
+        &_back
+            width: 290px
+        &_text
+            font-size: 18px
+            margin-top: 81px
+        &_icon
+            top: 206px
+    .black
+        padding-top: 25px
+        /* background: url('../img/bg/bg_round.png') center (center / 300%) no-repeat */
+        background: #000
+        h3, h2
+            display: none
