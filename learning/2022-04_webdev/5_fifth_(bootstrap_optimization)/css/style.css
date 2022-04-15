@@ -1,0 +1,11 @@
+* {
+  font-face: tahoma;
+}
+
+.box {
+  background-color: #000;
+  color: #fff;
+  border: red 1px solid;
+  text-align: center;
+}
+/*# sourceMappingURL=style.css.map */
