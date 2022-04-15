@@ -1,0 +1,469 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light.eot');
+    src: url('../fonts/Roboto-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Light.woff') format('woff'),
+    url('../fonts/Roboto-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    }
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Regular.woff') format('woff'),
+    url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    }
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Medium.eot');
+    src: url('../fonts/Roboto-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Medium.woff') format('woff'),
+    url('../fonts/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Black.eot');
+    src: url('../fonts/Roboto-Black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Black.woff') format('woff'),
+    url('../fonts/Roboto-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('../fonts/RobotoCondensed-Light.eot');
+    src: url('../fonts/RobotoCondensed-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoCondensed-Light.woff') format('woff'),
+    url('../fonts/RobotoCondensed-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.promo {
+    min-height: 800px;
+    background: url('../img/logo_bg.png') center center/cover no-repeat;
+}
+
+.container {
+    display: block;
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+}
+
+h1 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+div.top {
+    padding: 39px 0 62px 0;
+}
+
+img.logo_owl {
+    display: block;
+    margin: 0 auto;
+}
+
+div.top .text {
+    display: block;
+    margin: 0 auto;
+    margin-top: 14px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "WordPress" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+div.top h1 {
+    margin: 0 auto;
+    margin-top: 53px;
+    color: #f9bf3b;
+    font-size: 41px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "Создать" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.simple {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    line-height: 62px;
+    color: #ffffff;
+    font-size: 80px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "это просто" */
+    font-style: normal;
+    letter-spacing: normal;
+}
+
+h2 {
+    margin: 0 auto;
+    margin-top: 30px;
+    color: #f9bf3b;
+    font-size: 41px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "К, уда сло" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.top_text {
+    padding: 0 13px;
+    margin: 0 auto;
+    margin-top: 23px;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 28px;
+    text-align: center;
+}
+
+div.top_text span {
+    color: #f9bf3b;
+    font-family: "Roboto";
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.promo_btn {
+    display: block;
+    width: 313px;
+    height: 72px;
+    margin: 0 auto;
+    margin-top: 73px;
+    box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.18);
+    border: 4px solid rgba(0, 0, 0, 0.23);
+    background-image: linear-gradient(to top, #2798b9 0%, #3ab6da 100%);
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.22);
+    color: #ffffff;
+    font-family: "Roboto Condensed";
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "З, аписать" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.more {
+    margin-top: 73px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "узнать бол" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.arrow {
+    margin-top: 13px;
+}
+
+/* === SECOND SECTION === */
+
+.second {
+    background-color: #efefef;
+    padding: 85px 0px 75px 0px;
+    min-height: 604px;
+}
+
+.waiting_header, .finish .finish_header {
+    color: #252525;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    /* Text style for "Ч, то вас" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.finish .finish_header {
+    color: #efefef;
+}
+
+.waiting_line, .finish_line {
+    display: block;
+    margin: 0 auto;
+    width: 217px;
+    height: 4px;
+    background-color: #f9bf3b;
+    margin-top: 18px;
+}
+
+.waiting_header2 {
+    margin-top: 17px;
+    color: #4a4a4a;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: center;
+    /* Text style for "2 бесплатн" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.waiting_wrapper {
+    margin-top: 45px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.waiting_content {
+    text-align: center;
+    width: 342px;
+    color: #4a4a4a;
+    font-size: 15px;
+    font-weight: 300;
+    text-align: center;
+    /* Text style for "Всего за д" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.waiting_content_img {
+    width: 100%;
+}
+
+.waiting_content_txt {
+    margin-top: 33px;
+}
+
+.optimization {
+    min-height: 550px;
+    padding: 102px 0px 107px 0px;
+}
+
+.optimization .optimization_header {
+    margin: 0;
+    margin-left: 361px;
+    color: #299cbd;
+    font-size: 30px;
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.optimization .optimization_text {
+    margin-left: 361px;
+    margin-top: 25px;
+    color: #4a4a4a;
+    font-size: 17px;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 27px;
+    text-align: justify;
+}
+
+.optimization .optimization_text span {
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.optimization_img {
+    height: 502px;
+    position: absolute;
+    bottom: -107px;
+    left: -240px;
+    z-index: -1;
+}
+
+.finish {
+    min-height: 447px;
+    padding: 86px 0 79px 0;
+    background: url('../img/logo_bottom.png') center center/cover no-repeat;
+}
+
+.finish .finish_wrapper {
+    margin-top: 41px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.finish .finish_wrapper .finish_item {
+    width: 204px;
+}
+
+.finish .finish_wrapper .finish_item .finish_round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* Style for "Ellipse 1" */
+    width: 115px;
+    height: 115px;
+    background-color: #b4e2ff;
+    border-radius: 100%;
+}
+
+.finish_icon {
+
+}
+
+.finish .finish_wrapper .finish_item .finish_descr {
+    margin-top: 25px;
+    text-align: center;
+    color: #efefef;
+    font-family: Roboto;
+    font-size: 17px;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 20px;
+    text-align: center;
+}
+
+/* BONUS */
+/* BONUS */
+/* BONUS */
+.bonus {
+    min-height: 628px;
+    background-color: #efefef;
+    padding: 86px 0 87px 0;
+}
+.bonus_img {
+    display: block;
+    margin: 0 auto;
+}
+
+.bonus .container span {
+    display: inherit;
+    margin-top: 42px;
+    text-align: center;
+    color: #252525;
+    font-family: Roboto;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 43px;
+    text-align: center;
+}
+
+.mrgn {
+    margin-top: 52px;
+}
+
+/* WEBINAR */
+/* WEBINAR */
+/* WEBINAR */
+.webinar {
+    min-height: 515px;
+    padding: 89px 0 64px 0;
+}
+.webinar .webinar_img {
+    display: block;
+    margin: 0 auto;
+}
+.webinar span {
+    display: block;
+    text-align: center;
+}
+.webinar .webinar_text_1 {
+    margin-top: 37px;
+    color: #252525;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+    text-transform: uppercase;
+}
+.webinar .webinar_text_2 {
+    margin-top: 30px;
+    color: #299cbd;
+    font-size: 36px;
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+    text-transform: uppercase;
+}
+.webinar .webinar_text_3 {
+    margin-top: 25px;
+    color: #4a4a4a;
+    font-size: 23px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+}
+
+/* FOOTER */
+/* FOOTER */
+/* FOOTER */
+.footer {
+    min-height: 166px;
+    background: black;
+    padding: 61px 0 0 0;
+}
+.footer_text {
+    text-align: center;
+    color: #888888;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 21px;
+}
+.footer a {
+    text-decoration: underline;
+    color: #888888;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 21px;
+}
