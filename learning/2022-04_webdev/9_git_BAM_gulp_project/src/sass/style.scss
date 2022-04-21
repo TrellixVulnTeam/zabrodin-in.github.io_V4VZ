@@ -1,8 +1,25 @@
-* {
-    font-size: 25px
-}
-
 @import 'base/variables';
 @import 'base/mixins';
-@import 'base/general';
+@import 'blocks/buttons';
+
+body {
+    background-color: #f6f6f6;
+}
+* {
+    font-size: 17px;
+    font-family: 'Museo Sans Cyrl', 'Roboto', sans-serif;
+    font-weight: 300;
+}
+.container {
+    min-width: 950px;
+    margin: 0 auto;
+}
+
+@import 'blocks/titles';
+@import 'blocks/promo';
+@import 'blocks/header';
+@import 'blocks/advantages';
+@import 'blocks/consultation';
+@import 'blocks/forms';
+
 @import 'base/media';

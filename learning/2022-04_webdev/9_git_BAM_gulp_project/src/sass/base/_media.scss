@@ -1,0 +1,224 @@
+@media (max-width: 991px){
+    .container {
+        min-width: 760px;
+    }
+}
+
+@media (max-width: 767px){
+    .button {
+        width: 120px;
+        height: 30px;
+        font-size: 10px;
+        &_main {
+            width: 230px;
+            height: 30px;
+            font-size: 13px;
+            margin: 45px 0 0 0;
+        }
+        &_submit {
+            width: 100%;
+            height: 55px;
+            font-size: 16px;
+        }
+    }
+
+    .title {
+        &_left {
+            font-size: 30px;
+        }
+    }
+
+    .container {
+        min-width: 570px;
+    }
+
+    .promo {
+        padding: 11px 0 23px 0;
+        min-height: 425px;
+        &__wrapper {
+            margin: 35px 0 0 0;
+        }
+        &__header {
+            font-size: 33px;
+        }
+        &__subheader {
+            font-size: 19px;
+            margin-top: 5px;
+        }
+        &__icons {
+            font-size: 12px;
+            margin: 38px 0 10px 0;
+            width: 340px;
+        }
+        &__icon {
+            font-size: 12px;
+            img {
+                margin-bottom: 8px;
+            }
+        }
+        &__link {
+            margin: 8px 0 0 0;
+            font-size: 12px;
+            a {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .header {
+        &__logo {
+            width: 180px;
+        }
+        &__official {
+            font-size: 10px;
+            span {
+                font-size: 14px;
+            }
+        }
+        &__phone {
+            font-size: 14px;
+        }
+    }
+
+    .advantages {
+        margin-top: 35px;
+        margin-bottom: 35px;
+        &__wrapper {
+            margin-top: 30px;
+        }
+        &__item {
+            font-size: 12px;
+            padding: 0 15px;
+            span {
+                font-size: 14px;
+                margin: 28px 0 15px 0;
+            }
+            a {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .consultation {
+        min-height: 600px;
+        padding: 60px 0;
+        &__subscr {
+            margin-top: 40px;
+            font-size: 16px;
+        }
+    }
+
+    .feed-form {
+        width: 270px;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 575px){
+    .button {
+        &_main {
+            margin: 25px 0 0 0;
+        }
+    }
+    .title {
+        font-size: 22px;
+    }
+    .container {
+        min-width: 300px;
+    }
+
+    .promo {
+        min-height: 350px;
+        &__icons {
+            width: 300px;
+        }
+        &__wrapper {
+            width: 100%;
+            margin-top: 25px;
+        }
+        &__header {
+            font-size: 24px;
+            text-align: right;
+        }
+        &__subheader {
+            font-size: 14px;
+        }
+        &__icons {
+            margin: 30px 0;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        &__icon {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            img {
+                display: none;
+            }
+        }
+    }
+
+    .header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        &__logo {
+            width: 240px;
+            margin-bottom: 20px;
+            img {
+                width: 240px;
+            }
+        }
+        &__contacts {
+            padding-bottom: 20px;
+            width: 130px;
+        }
+        &__official {
+            display: none;
+        }
+    }
+
+    .advantages {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        &__wrapper {
+            margin-top: 0;
+            margin-bottom: 0px;
+            flex-direction: column;
+            align-items: center;
+        }
+        &__item {
+            display: flex;
+            flex-direction: column;
+            min-width: 280px;
+            width: 80%;
+            margin-top: 15px;
+            span {
+                font-size: 14px;
+                margin: 18px 0 5px 0;
+                align-self: center;
+            }
+            a {
+                font-size: 12px;
+            }
+            img {
+                align-self: center;
+            }
+        }
+    }
+
+    .consultation {
+        min-height: 530px;
+        padding: 40px 0;
+        &__subscr {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+    }
+
+    .feed-form {
+        align-items: center;
+        width: 270px;
+        margin: 0 auto;
+        margin-top: 25px;
+    }
+}
