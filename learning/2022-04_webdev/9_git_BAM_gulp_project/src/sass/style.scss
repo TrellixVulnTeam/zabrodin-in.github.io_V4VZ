@@ -11,6 +11,7 @@ body {
     font-weight: 300;
 }
 .container {
+    position: relative;
     min-width: 950px;
     margin: 0 auto;
 }
@@ -22,5 +23,6 @@ body {
 @import 'blocks/consultation';
 @import 'blocks/forms';
 @import 'blocks/carousel';
+@import 'blocks/catalog';
 
 @import 'base/media';

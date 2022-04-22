@@ -1,6 +1,19 @@
+@media (min-width: 1000px){
+    .tns-nav {
+        display: none;;
+    }
+}
 @media (max-width: 991px){
     .container {
         min-width: 760px;
+    }
+    .carousel {
+        .prev, .next {
+            display: none;
+        }
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -111,6 +124,10 @@
     .feed-form {
         width: 270px;
         margin-top: 30px;
+    }
+
+    .carousel {
+        padding: 60px 0 80px 0;
     }
 }
 
