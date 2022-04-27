@@ -7,12 +7,36 @@
     .container {
         min-width: 760px;
     }
+    
     .carousel {
         .prev, .next {
             display: none;
         }
         img {
             width: 100%;
+        }
+    }
+    
+    .catalog {
+        padding-bottom: 50px;
+        &__tabs {
+            padding-top: 40px;
+        }
+        // qfwohwfoqhwofhqowhf oqhwf oqhwofqow foqwofqowfhq owhfoqw oqow fhqwf
+        &__content {
+            width: 620px;
+        }
+    }
+    
+    .reviews {
+        &__wrapper {
+            width: 100%;
+        }
+        .review {
+            width: 100%;
+            &__info {
+                padding-right: 0;
+            }
         }
     }
 }
@@ -124,10 +148,39 @@
     .feed-form {
         width: 270px;
         margin-top: 30px;
+        &_mt25 {
+            width: 100%;
+            margin-top: 25px;
+        }
     }
 
     .carousel {
         padding: 60px 0 80px 0;
+    }
+
+    .catalog {
+        &__content {
+            width: 300px;
+        }
+    }
+
+    .reviews {
+        h2 {
+            margin-bottom: 10px;
+        }
+        .review {
+            width: 90%;
+            padding: 30px 0 30px 0;
+            &__photo {
+                padding-right: 30px;
+            }
+            &__info {
+                padding-right: 0;
+            }
+            &__text {
+                font-size: 13px;
+            }
+        }
     }
 }
 
@@ -236,6 +289,101 @@
         align-items: center;
         width: 270px;
         margin: 0 auto;
-        margin-top: 25px;
+        margin-top: 15px;
+        &_mt25 {
+            width: 100%;
+            margin-top: 25px;
+        }
+    }
+
+    .catalog {
+        padding-bottom: 30px;
+        &__content {
+            width: 280px;
+            margin: 30px auto;
+            margin-bottom: 0;
+        }
+        &__tabs {
+            padding-top: 20px;
+            flex-wrap: wrap;
+        }
+        &__tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 130px;
+            line-height: normal;
+            margin-bottom: 10px;
+            div {
+                font-size: 13px;
+            }
+        }
+    }
+
+    .reviews {
+        h2 {
+            margin-bottom: 10px;
+        }
+        .review {
+            width: 90%;
+            padding: 15px 0 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            &__photo {
+                padding-right: 30px;
+                img {
+                    width: 130px;
+                }
+            }
+            &__info {
+                padding-right: 0;
+            }
+            &__name {
+                margin-top: 15px;
+            }
+            &__subname {
+                margin-top: 5px;
+            }
+            &__text {
+                font-size: 13px;
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .footer {
+        &__info {
+            width: 320px;
+            height: 170px;
+        }
+        &__address {
+            font-size: 16px;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+        &__phone {
+            font-size: 16px;
+        }
+        &__social {
+            margin-top: 10px;
+        }
+    }
+
+
+    .modal {
+        width: 65%;
+        min-height: 300px;
+        padding: 25px 25px;
+        &__subtitle {
+            font-size: 16px;
+        }
+        &__descr {
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .error {
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
     }
 }
