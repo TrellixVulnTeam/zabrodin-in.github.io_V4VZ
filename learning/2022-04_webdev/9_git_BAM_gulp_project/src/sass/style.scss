@@ -1,7 +1,12 @@
+@import 'libs/bootstrap-reboot.min';
+@import 'libs/bootstrap-grid.min';
+@import 'libs/font';
+@import 'libs/animate.3.7.2.min';
+@import 'libs/slick';
+
 @import 'base/variables';
 @import 'base/mixins';
 @import 'base/animations';
-@import 'blocks/buttons';
 
 body {
     background-color: #f6f6f6;
@@ -18,6 +23,7 @@ body {
     margin: 0 auto;
 }
 
+@import 'blocks/buttons';
 @import 'blocks/titles';
 @import 'blocks/promo';
 @import 'blocks/header';
