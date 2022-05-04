@@ -1,0 +1,66 @@
+.promo {
+    height: 100vh;
+    min-height: 500px;
+    max-height: 800px;
+    background: #848486 url('../img/bg_promo.jpg') top center no-repeat;
+    padding: 205px 0 0 0;
+    position: relative;
+
+    /////// DELETE
+    .container {
+        border-left: 1px solid red;
+        border-right: 1px solid red;
+    }
+    ////////
+    &__name {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+        padding-left: 10px;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -6px;
+            z-index: -1;
+            width: 36px;
+            height: 36px;
+            border-radius: 100%;
+            background-color: $main;
+        }
+    }
+    &__header {
+        width: 590px;
+        margin-top: 9px;
+        h1 {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 60px;
+            color: #FFFFFF;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+    }
+    &__btn {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        color: #fff;
+        margin-top: 25px;
+        &_link {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 21px;
+            color: #fff;
+            text-decoration: underline;
+            margin-right: 44px;
+            &:hover {
+                text-decoration: none;
+                color: #fff;
+                // #f2f2f2d4;
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+@media (min-width: 2200px){
+    .promo {
+        background: #848486 url('../img/bg_promo.jpg') top center no-repeat;
+        background-size: 100% auto;
+    }
+}
+@media (max-width: 1300px){
+    .container {
+        width: 1040px;
+    }
+    .promo {
+        background: #848486 url('../img/bg_promo.jpg') 55% top no-repeat;
+    }
+}
+@media (max-width: 1200px){
+    .container {
+        width: 900px;
+    }
+    .promo {
+        background: #848486 url('../img/bg_promo.jpg') 62% top no-repeat;
+    }
+}

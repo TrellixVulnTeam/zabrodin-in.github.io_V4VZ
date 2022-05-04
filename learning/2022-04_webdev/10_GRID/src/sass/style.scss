@@ -1,0 +1,183 @@
+body {
+    display: flex;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+html {
+    box-sizing: border-box;
+}
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+.grid-container-3 {
+    display: grid;
+    width: 100%;
+    background-color: gray;
+    grid-template-columns: repeat(3, minmax(200px, 1fr)); 
+    grid-template-rows: repeat(3, minmax(100px, 1fr)); 
+    grid-auto-rows: minmax(50px, 1fr);
+    justify-content: center;
+    grid-template-areas: 
+        "header header header"
+        "blog blog message"
+        "footer footer footer";
+    gap: 10px;
+}
+.grid-elem-3 {
+    background-color: blue;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.orange {
+    background-color: #ffa600f4;
+    justify-self: stretch;
+    align-self: stretch;
+}
+#header {
+    grid-area: header;
+}
+#blog {
+    grid-area: blog;
+}
+#message {
+    grid-area: message;
+}
+#footer {
+    grid-area: footer;
+    display: grid;
+    background-color: red;
+
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(3, minmax(20px, 1fr)); 
+    grid-auto-rows: minmax(50px, 50px);
+    gap: 10px;
+}
+
+
+// ///////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////
+.main {
+    background-color: rgb(215, 32, 32);
+    width: 100%;
+    display: none;
+}
+.grid-container-2 {
+    background-color: rgba(108, 87, 87, 1);
+    display: grid;
+    width: 100%;
+    height: 1000px;
+    grid-template-columns: repeat(3, minmax(200px, 300px));
+    grid-template-rows: repeat(3, minmax(150px, 200px));
+    grid-auto-rows: minmax(100px, auto);
+    gap: 10px;
+    // justify-content: space-around;
+    // align-content: space-between;
+
+    // place-content: align + justify;
+    place-content: start center;
+    // place-items: align + justify;
+    place-items: start center;
+}
+.grid-elem-2 {
+    background-color: rgba(89, 103, 194, 1);
+    // border: 1px solid black;
+    // border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #fff;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    &:nth-child(1) {
+        background: url('../img/1_1.jpeg') center (center / cover) no-repeat;
+        align-self: stretch;
+    }
+    &:nth-child(2) {
+        background: url('../img/1_2.jpeg') center (center / cover) no-repeat;
+    }
+    &:nth-child(3) {
+        background: url('../img/1_3.jpeg') center (center / cover) no-repeat;
+    }
+    &:nth-child(4) {
+        background: url('../img/1_4.jpg') center (center / cover) no-repeat;
+    }
+    &:nth-child(5) {
+        background: url('../img/1_5.jpeg') center (center / cover) no-repeat;
+    }
+}
+
+#first {
+    grid-column: 1/3;
+    grid-row: 1/2;
+}
+#second {
+
+}
+#third {
+
+}
+#fourth{
+    grid-column: 3/4;
+    grid-row: 1/3;
+}
+#fifth {
+    grid-column: 1/4;
+}
+#eight {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+
+
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+.grid-container {
+    display: none;
+    // display: grid;
+    margin: 0 auto;
+    // background-color: rgba(108, 87, 87, 1);
+    width: 1140px;
+    padding: 82px 0 88px 0;
+    grid-template-columns: repeat(4, 240px);
+    grid-auto-rows: minmax(260px, auto);
+    gap: 60px;
+}
+.grid-elem {
+    // background-color: rgba(89, 103, 194, 1);
+    // border: 1px solid black;
+    border-radius: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
+    img {
+        margin-bottom: 15px;
+    }
+}

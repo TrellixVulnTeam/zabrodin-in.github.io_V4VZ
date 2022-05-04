@@ -1,0 +1,60 @@
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("Poppins - 100"),
+        /* Если не получилось, загрузит woff2 */
+        url("../fonts/Poppins-100-Thin.woff") format("woff"),
+         /* Если браузер не поддерживает woff2, загрузит ttf */
+         url("../fonts/Poppins-100-Thin.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("Poppins - 300"),
+        /* Если не получилось, загрузит woff2 */
+        url("../fonts/Poppins-300-Light.woff") format("woff"),
+         /* Если браузер не поддерживает woff2, загрузит ttf */
+         url("../fonts/Poppins-300-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("Poppins - 400"),
+        /* Если не получилось, загрузит woff2 */
+        url("../fonts/Poppins-400-Regular.woff") format("woff"),
+         /* Если браузер не поддерживает woff2, загрузит ttf */
+         url("../fonts/Poppins-400-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("Poppins - 500"),
+        /* Если не получилось, загрузит woff2 */
+        url("../fonts/Poppins-500-Medium.woff") format("woff"),
+         /* Если браузер не поддерживает woff2, загрузит ttf */
+         url("../fonts/Poppins-500-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("Poppins - 700"),
+        /* Если не получилось, загрузит woff2 */
+        url("../fonts/Poppins-700-Bold.woff") format("woff"),
+         /* Если браузер не поддерживает woff2, загрузит ttf */
+         url("../fonts/Poppins-700-Bold.ttf") format("truetype");
+}
