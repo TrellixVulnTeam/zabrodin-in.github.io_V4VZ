@@ -1,0 +1,118 @@
+.menu {
+    .hamburger {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        height: 21px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        z-index: 13;
+        cursor: pointer;
+        transition: 0.3s all;
+        &.active {
+            opacity: 0;
+        }
+        &__elem {
+            width: 30px;
+            height: 3px;
+            background-color: #000;
+            &.middle {
+                width: 36px;
+            }
+        }
+    }
+    &__left {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 345px;
+        background-color: $main;
+        height: 100vh;
+        z-index: 15;
+        padding: 100px 20px 140px 40px;
+        transition: 0.5s all;
+        &.active {
+            left: 0;
+            top: 0;
+        }
+    }
+    &__social {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        width: 90px;
+        justify-content: space-between;
+        svg {
+            width: 20px; 
+            height: 20px;
+        }
+    }
+    &__close {
+        width: 29px;
+        height: 29px;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        cursor: pointer;
+    }
+    &__overlay {
+        width: 100vw;
+        height: 100vh;
+        background: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -3;
+        transition: 1s all;
+        opacity: 0;
+        &.active {
+            opacity: 1;
+            z-index: 14;
+            background: linear-gradient(35deg, rgba(29, 29, 29, 0.25), rgba(255, 255, 255, 1));
+        }
+    }
+    &_header4 {
+        color: #000;
+        margin: 0 0 20px 0;
+        font-weight: 700;
+    }
+    &__list {
+        list-style-type: none;
+        padding: 0 0 0 35px;
+    }
+    &__item {
+        margin-bottom: 15px;
+        position: relative;
+        &_link {
+            color: #fff;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 36px;
+            text-decoration: none;
+            text-transform: uppercase;
+            &:before {
+                content: '';
+                position: absolute;
+                left: -35px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 15px;
+                height: 15px;
+                border: 1px solid #000;
+                border-radius: 100%;
+                transition: 0.5s all;
+            }
+            &:hover {
+                text-decoration: none;
+                color: #fff;
+                &:before {
+                    background-color: rgb(0, 0, 0);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,81 @@
+.policy {
+    height: 40vh;
+    min-height: 300px;
+    background: #848486 url('../img/bg_promo.jpg') center 20% no-repeat;
+    padding: 40px 0 0 0;
+    &__name {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+        padding-left: 10px;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -6px;
+            z-index: -1;
+            width: 36px;
+            height: 36px;
+            border-radius: 100%;
+            background-color: $main;
+        }
+        a {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+        }
+    }
+    &__header {
+        width: 870px;
+        margin-top: 19px;
+        h1 {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 60px;
+            color: #FFFFFF;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+    }
+    &_list {
+        margin: 60px 10%;
+        margin-right: 15%;
+        align-self: center;
+        list-style-type: none;
+        li {
+            font-size: 12px;
+            padding-left: 2em;
+            &.header {
+                font-weight: 700;
+                padding-left: 0;
+            }
+            a {
+                font-size: 18px;
+                color: #000;
+                font-weight: 700;
+                position: relative;
+                padding-left: 15px;
+                &:hover {
+                    text-decoration: none;
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: -6px;
+                    z-index: -1;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 100%;
+                    background-color: $main;
+                }
+            }
+        }
+    }
+}

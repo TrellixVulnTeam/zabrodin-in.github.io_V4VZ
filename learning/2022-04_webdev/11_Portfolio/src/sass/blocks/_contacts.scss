@@ -1,0 +1,100 @@
+.contacts {
+    padding: 60px 0 91px 0;
+    .container {
+        width: 1040px;
+        padding: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    &__img {
+        max-width: 400px;
+        max-height: 600px;
+        align-self: flex-start;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+    &__main {
+        display: block;
+        width: 585px;
+    }
+    &__bold {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        margin: 20px 0;
+    }
+    &__social {
+        display: flex;
+        justify-content: flex-start;
+        &_link {
+            img {
+                max-width: 30px;
+                height: 30px;
+                margin: 0 20px 0 0;
+            }
+        }
+    }
+    &__form_grid {
+        display: grid;
+        width: 100%;
+        grid-template: auto / repeat(2, 1fr);
+        column-gap: 25px;
+        row-gap: 32px;
+        .line {
+            grid-column: 1/3;
+        }
+    }
+    &__input {
+        position: relative;
+        input, textarea {
+            position: relative;
+            width: 100%;
+            height: 45px;
+            padding: 13px 20px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+        }
+        textarea {
+            height: 190px;
+            resize: none;
+        }
+        label {
+            position: absolute;
+            top: -9px;
+            left: 12px;
+            background-color: #fff;
+            border-radius: 10px;
+            color: #000;
+            height: 18px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            padding: 0 8px;
+            z-index: 3;
+        }
+    }
+    &__triggers {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__policy {
+        padding-right: 10px;
+        input {
+            margin: 0 5px 0 0;
+            transform: translateY(1px);
+        }
+        a {
+            font-size: 13px;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        span {
+            color: #000;
+            font-size: 13px;
+        }
+    }
+}

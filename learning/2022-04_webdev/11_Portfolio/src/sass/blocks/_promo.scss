@@ -4,14 +4,6 @@
     max-height: 800px;
     background: #848486 url('../img/bg_promo.jpg') top center no-repeat;
     padding: 205px 0 0 0;
-    position: relative;
-
-    /////// DELETE
-    .container {
-        border-left: 1px solid red;
-        border-right: 1px solid red;
-    }
-    ////////
     &__name {
         font-weight: 700;
         font-size: 16px;
@@ -33,7 +25,7 @@
         }
     }
     &__header {
-        width: 590px;
+        width: 570px;
         margin-top: 9px;
         h1 {
             font-weight: 700;
@@ -44,22 +36,17 @@
         }
     }
     &__btn {
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 21px;
-        color: #fff;
         margin-top: 25px;
         &_link {
-            font-weight: 700;
-            font-size: 14px;
-            line-height: 21px;
             color: #fff;
             text-decoration: underline;
             margin-right: 44px;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 21px;
             &:hover {
                 text-decoration: none;
                 color: #fff;
-                // #f2f2f2d4;
             }
         }
     }

@@ -7,17 +7,20 @@
 @import 'base/animations';
 @import 'base/titles';
 
-body {
-
-}
 * {
     font-size: 17px;
-    font-family: 'Poppins', 'Roboto', sans-serif;
+    font-family: 'Poppins', 'Montserrat', 'Roboto', sans-serif;
     font-weight: 300;
 }
 .container {
     width: 1140px;
     margin: 0 auto;
+}
+.container.p12 {
+    padding: 0 12px 0 12px;
+}
+.container.p0 {
+    padding: 0;
 }
 .social {
     position: fixed;
@@ -53,14 +56,25 @@ body {
         background-color: #000;
     }
 }
-
+.h60 {
+    height: 60px;
+}
+.h70 {
+    height: 70px;
+}
 
 .btn {
     @include btn;
 }
 
-
 @import 'blocks/promo';
+@import 'blocks/menu';
 @import 'blocks/about-me';
+@import 'blocks/experience';
+@import 'blocks/skills';
+@import 'blocks/portfolio';
+@import 'blocks/price';
+@import 'blocks/contacts';
+@import 'blocks/policy';
 
 @import 'base/media';
