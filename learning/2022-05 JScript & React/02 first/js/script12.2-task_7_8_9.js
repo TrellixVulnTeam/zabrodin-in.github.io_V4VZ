@@ -169,7 +169,7 @@ function fib(num) {
     let arr = [],
         result = '';
     if (num % 1 != 0) {
-        // console.log('Вы ввели дробное число или текст');
+        console.log('Вы ввели дробное число или текст');
         return result;
     }
     for (let i = 0; i < num; i++) {
@@ -190,15 +190,49 @@ function fib(num) {
             result += (arr[i] + ' ');
         }
     }
-    // console.log(result);
     return result;
 }
 
-fib(1);
-fib(0);
-fib(2);
-fib(0);
-fib('aw');
-fib(3);
-fib(3.3);
-fib(8);
+
+// ВАРИАНТ ИЗ ИНЕТА. РЕКУРСИЯ
+// function fib(n) {
+//     return n <= 1 ? n : fib(n - 1) + fib(n - 2);
+//   }
+
+// ВАРИАНТ ИЗ КУРСА ОТ ПЕТРИЧЕ
+// function fib(num) {
+//     if (typeof(num) !== 'number' || num <= 0 || !Number.isInteger(num)) {
+//         return "";
+//     }
+
+//     let result = '';
+//     let first = 0;
+//     let second = 1;
+
+//     for (let i = 0; i < num; i++) {
+//         if (i + 1 === num) {
+//             result += `${first}`;
+//             // Без пробела в конце
+//         } else {
+//             result += `${first} `;
+//         }
+
+//         let third = first + second;
+//         first = second;
+//         second = third;
+//     }
+
+//     return result;
+// }
+
+
+
+// fib(1);
+// fib(0);
+// fib(2);
+// fib(0);
+// fib('aw');
+// fib(3);
+// fib(3.3);
+
+console.log(fib(40));
