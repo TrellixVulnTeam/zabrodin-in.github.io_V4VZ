@@ -8,35 +8,47 @@
 // Kebab-case
 
 
-let a = 15;
-console.log(a);
-console.log('--------');
+// let a = 15;
+// console.log(a);
+// console.log('--------');
 
 
-let number = 5;
-const leftBorderWidth = 1;
+// let number = 5;
+// const leftBorderWidth = 1;
 
-number = 12;
-console.log(number);
+// number = 12;
+// console.log(number);
 
-const obj = {
-    a: 50
-};
+// const obj = {
+//     a: 50
+// };
 
-obj.a = 40;
+// obj.a = 40;
 
-console.log(obj);
+// console.log(obj);
 
-console.log(name);
-var name = 'Ivan';
-console.log(name);
+// console.log(name);
+// var name = 'Ivan';
+// console.log(name);
 
-console.log('--------');
+// console.log('--------');
+// // console.log(name2);
+// let name2 = 'Ivan2';
 // console.log(name2);
-let name2 = 'Ivan2';
-console.log(name2);
 
-{
-    let name3 = 43;
-}
+// {
+//     let name3 = 43;
+// }
 // console.log(name3);
+
+
+
+let obj = {
+    a: 'a',
+    b: 3,
+    c: 213124
+}
+console.log(Object.keys(obj).length);
+
+
+console.log(`--------------------\nTHAT WAS TEST SCRIPT\n--------------------`);
