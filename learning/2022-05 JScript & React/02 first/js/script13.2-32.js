@@ -16,26 +16,26 @@ let options = {
 
 console.log(options);
 
-console.log('--------');
+console.log('----1----');
 for (let key in options) {
 console.log(`Ключ: ${key}; значение: ${options[key]}`);
 }
 
-console.log('--------');
+console.log('----2----');
 for (let key in options.name4) {
 console.log(`Ключ: ${key}; значение: ${options.name4[key]}`);
 }
 
-console.log('--------');
+console.log('----3----');
 console.log(Object.keys(options));
 console.log(Object.keys(options).length);
 
 console.log(Object.values(options));
 console.log(Object.values(options).length);
 
-console.log('--------');
+console.log('----4----');
 options.makeTest();
 
-console.log('--------');
+console.log('----5----');
 const {subname1, subname3} = options.name4;
 console.log(subname3 + ' ' + subname1);
