@@ -54,3 +54,31 @@ console.log(typeof(c1));
 // let a = test();
 // let b = test();
 // console.log(a, b);
+
+
+
+
+
+// IF TEST
+// let time = '';
+// 5 > 3 || 2 ? time = 'Day' : time = 'Night';
+// console.log(time);
+
+
+// let y = 1; let x = y = 2;
+// console.log(null || 2 && 3 || 4 );
+
+
+// let  a = [1, 2, 3],
+//      b = [1, 2, 3]; 
+// console.log(a==b);
+
+// console.log("Ёжик" > "яблоко");
+// console.log(0 || "" || 2 || undefined || true || falsе);
+
+// (2 >= 2) && true ? console.log('true22') : console.log('false22');
+
+// let y = 1; let x = y = 2; console.log(2 && 1 && null && 0 && undefined ); 
+
+// let	a = [1, 2, 3], b = [1, 2, 3]; 
+// "Ёжик" > "яблоко" ? console.log(true) : console.log(0 || "" || 2 || undefined || true || falsе );
