@@ -82,3 +82,23 @@ console.log(typeof(c1));
 
 // let	a = [1, 2, 3], b = [1, 2, 3]; 
 // "Ёжик" > "яблоко" ? console.log(true) : console.log(0 || "" || 2 || undefined || true || falsе );
+
+let a = b = c = 2;
+console.log(a,b,c);
+
+let arr = [];
+arr[1] = arr[2] = arr[3] = 92;
+console.log(arr);
+
+console.log("23"[1]);
+
+console.log(2 && 1 && undefined && null && 0 );
+
+
+let aa = "Infinity";
+console.log(+aa);
+console.log(typeof(+aa));
+
+aa = aa + 1;
+console.log(+aa);
+console.log(typeof(+aa));
