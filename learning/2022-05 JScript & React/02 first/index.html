@@ -105,6 +105,27 @@
         <!-- LESSON 48. PRACTISE in "02 second - practise (lesson 44)" -->
 
     
+    <!-- MOBILE EVENTS -->
+    <script src="js/script28.2-49.js"></script>
+    <!-- WORKING WITH index2-49.html -->
+
+    <!-- LESSON 50 -->
+    <!--
+        Использование defer и async
+        defer позволяет проводить загрузку скриптов в фоновом режиме
+        можно ставить в начало страницы
+        Важно (!!) все скрипты с атрибутом defer загружаются последовательно
+
+        async то же что и defer, но грузятся не поочередно, а по факту загрузки
+        Важно (!!) такие скрипты НЕ должны зависить ни от DOM-структуры, ни от других скриптов на странице, иначе могут возникать ошибки
+
+        еще вариант вставлять скрипт из другого скрипта, через следующий код:
+            const script = document.createElement('script');
+            script.src = "js/script.js";
+            document.body.append(script);
+        такие скрипты ведут себя как async
+        но можно поставить код script.async = false;
+    -->
 
     <!-- <script>
         alert('12d222s');
