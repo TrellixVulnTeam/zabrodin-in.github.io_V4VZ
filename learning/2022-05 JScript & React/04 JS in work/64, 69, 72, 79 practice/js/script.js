@@ -135,12 +135,13 @@ window.addEventListener('DOMContentLoaded', () => {
 ///////////////////////////////////////////////////////////////////
 //////////////// TEMPLATES BY CLASSES (menu__item) ////////////////
     class MenuCard {
-        constructor(title, imgSrc, alt, price, descr) {
+        constructor(title, imgSrc, alt, price, descr, ...classes) {
             this.title = title;
             this.imgSrc = imgSrc;
             this.alt = alt;
             this.descr = descr;
             this.price = price;
+            this.classes = classes;
             // ////// FIRST & SECOND VARIANT
             // this.HTML = `
             //     <img src="${this.imgSrc}" alt="${this.alt}">
@@ -156,6 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
         render() {
             const elem = document.createElement('div');
             elem.classList.add('menu__item');
+            this.classes.forEach(className => elem.classList.add(className));
             elem.innerHTML = `
                 <img src="${this.imgSrc}" alt="${this.alt}">
                 <h3 class="menu__item-subtitle">${this.title}</h3>
@@ -174,7 +176,8 @@ window.addEventListener('DOMContentLoaded', () => {
                             '../img/tabs/vegy.jpg',
                             'vegy',
                             229,
-                            'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!'),
+                            'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+                            'test1', 'test2'),
           item2 = new MenuCard('Меню “Премиум”',
                             '../img/tabs/elite.jpg',
                             'elite',
@@ -213,7 +216,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //     item.innerHTML = itemArr[i].HTML;
     //     menuContainer.append(item);
     // }
-    for (let i = 2; i <= 3; i--) {
+    for (let i = 0; i < 3; i++) {
         menuContainer.append(itemArr[i].render());
     }
 });
