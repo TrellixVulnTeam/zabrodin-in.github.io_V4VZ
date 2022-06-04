@@ -295,8 +295,26 @@ window.addEventListener('DOMContentLoaded', () => {
                 // console.log(object[key], value);
             });
 
-            const json = JSON.stringify(object);
-            request.send(json);
+            // ////// Changed for Fetch
+            // const json = JSON.stringify(object);
+            // request.send(json);
+
+            fetch('server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            }).then(data => data.text())
+            .then(data => {
+                console.log(data);
+                showThanksModal(message.success);
+                statusMessage.remove();
+            }).catch(() => {
+                showThanksModal(message.failure);
+            }).finally(() => {
+                form.reset();
+            });
 
             console.log(object);
 
