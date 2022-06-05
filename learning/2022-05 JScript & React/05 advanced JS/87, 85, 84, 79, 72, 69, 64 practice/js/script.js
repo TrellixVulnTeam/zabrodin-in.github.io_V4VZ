@@ -205,11 +205,19 @@ window.addEventListener('DOMContentLoaded', () => {
         return await res.json();
     };
     
-    getResources('http://localhost:3000/menu')
-        .then(data => {
+    // getResources('http://localhost:3000/menu')
+    //     .then(data => {
+    //         const menuContainer = document.querySelector('[data-menu-container]');
+    //         menuContainer.innerHTML = '';
+    //         data.forEach(({img, altimg, title, descr, price}) => {
+    //             menuContainer.append(new MenuCard(img, altimg, title, descr, price).render());
+    //         });
+    //     });
+    axios.get('http://localhost:3000/menu')
+        .then(data2 => {
             const menuContainer = document.querySelector('[data-menu-container]');
             menuContainer.innerHTML = '';
-            data.forEach(({img, altimg, title, descr, price}) => {
+            data2.data.forEach(({img, altimg, title, descr, price}) => {
                 menuContainer.append(new MenuCard(img, altimg, title, descr, price).render());
             });
         });
