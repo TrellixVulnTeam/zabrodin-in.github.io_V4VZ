@@ -441,14 +441,55 @@ window.addEventListener('DOMContentLoaded', () => {
         (index < 10) ? countCurr.textContent = `0${index}` : countCurr.textContent = `${index}`;
     }
     changeCount(slideIndex);
-    btnPrev.addEventListener('click', () => {
+    function prevSlide() {
         (slideIndex <= 1) ? slideIndex = slides.length : slideIndex--;
         changeCount(slideIndex);
         slidesField.style.transform = `translateX(-${(slideIndex - 1) * +width.slice(0, -2)}px)`;
-    });
-    btnNext.addEventListener('click', () => {
+        chooseSlide(slideIndex);
+    }
+    function nextSlide() {
         (slideIndex >= slides.length) ? slideIndex = 1 : slideIndex++;
         changeCount(slideIndex);
         slidesField.style.transform = `translateX(-${(slideIndex - 1) * +width.slice(0, -2)}px)`;
+        chooseSlide(slideIndex);
+    }
+    btnPrev.addEventListener('click', prevSlide);
+    btnNext.addEventListener('click', nextSlide);
+////////////////////////////////////////////
+//////////////// SLIDER DOTS ///////////////
+    const slider = document.querySelector('.offer__slider'),
+          dotList = document.createElement('ol');
+    dotList.classList.add('carousel-indicators');
+    slider.style.position = 'relative';
+    slider.append(dotList);
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('li');
+        dot.classList.add('dot');
+        dot.setAttribute('data-carousel-id', i);
+        dotList.append(dot);
+        if (i == slideIndex - 1) {
+            dot.classList.add('dot-bright');
+        }
+    }
+    dotList.addEventListener('click', (event) => {
+        if (event.target.matches('li')) {
+            console.log('asidawind');
+            console.log(event.target.getAttribute('data-carousel-id'));
+            slideIndex = +event.target.getAttribute('data-carousel-id') + 1;
+            console.log(slideIndex);
+            chooseSlide(slideIndex);
+        }
     });
+    function chooseSlide(index) {
+        changeCount(index);
+        slidesField.style.transform = `translateX(-${(index - 1) * +width.slice(0, -2)}px)`;
+        const dotLi = dotList.querySelectorAll('li');
+        dotLi.forEach((elem, id) => {
+            if (id == index - 1) {
+                elem.classList.add('dot-bright');
+            } else {
+                elem.classList.remove('dot-bright');
+            }
+        });
+    }
 });
