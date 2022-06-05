@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
 ///////////////////////////////////////////////////////////////////
 //////////////// TEMPLATES BY CLASSES (menu__item) ////////////////
     class MenuCard {
-        constructor(title, imgSrc, alt, price, descr, ...classes) {
+        constructor(imgSrc, alt, title, descr, price, ...classes) {
             this.title = title;
             this.imgSrc = imgSrc;
             this.alt = alt;
@@ -195,54 +195,73 @@ window.addEventListener('DOMContentLoaded', () => {
             return elem;
         }
     }
-    const menuContainer = document.querySelector('[data-menu-container]'),
-          item1 = new MenuCard('Меню "Фитнес"',
-                            'img/tabs/vegy.jpg',
-                            'vegy',
-                            229,
-                            'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-                            'test1', 'test2'),
-          item2 = new MenuCard('Меню “Премиум”',
-                            'img/tabs/elite.jpg',
-                            'elite',
-                            550,
-                            'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!'),
-          item3 = new MenuCard('Меню "Постное"',
-                            'img/tabs/post.jpg',
-                            'post',
-                            430,
-                            'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.'),
-          itemArr = [item1, item2, item3];
 
-    menuContainer.innerHTML = '';
-    // let item;
+    // 5-89
+    const getResources = async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`Couldn't fetch ${url}. Status ${res.status}`);
+        }
+        return await res.json();
+    };
+    
+    getResources('http://localhost:3000/menu')
+        .then(data => {
+            const menuContainer = document.querySelector('[data-menu-container]');
+            menuContainer.innerHTML = '';
+            data.forEach(({img, altimg, title, descr, price}) => {
+                menuContainer.append(new MenuCard(img, altimg, title, descr, price).render());
+            });
+        });
 
-    // ////// FIRST VARIANT
-    // item = document.createElement('div');
-    // item.classList.add('menu__item');
-    // item.innerHTML = item1.HTML;
-    // menuContainer.append(item);
+    // const menuContainer = document.querySelector('[data-menu-container]'),
+    //       item1 = new MenuCard('Меню "Фитнес"',
+    //                         'img/tabs/vegy.jpg',
+    //                         'vegy',
+    //                         229,
+    //                         'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    //                         'test1', 'test2'),
+    //       item2 = new MenuCard('Меню “Премиум”',
+    //                         'img/tabs/elite.jpg',
+    //                         'elite',
+    //                         550,
+    //                         'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!'),
+    //       item3 = new MenuCard('Меню "Постное"',
+    //                         'img/tabs/post.jpg',
+    //                         'post',
+    //                         430,
+    //                         'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.'),
+    //       itemArr = [item1, item2, item3];
 
-    // item = document.createElement('div');
-    // item.classList.add('menu__item');
-    // item.innerHTML = item2.HTML;
-    // menuContainer.append(item);
+    // menuContainer.innerHTML = '';
+    // // let item;
 
-    // item = document.createElement('div');
-    // item.classList.add('menu__item');
-    // item.innerHTML = item3.HTML;
-    // menuContainer.append(item);
+    // // ////// FIRST VARIANT
+    // // item = document.createElement('div');
+    // // item.classList.add('menu__item');
+    // // item.innerHTML = item1.HTML;
+    // // menuContainer.append(item);
 
-    // ////// SECOND VARIANT
+    // // item = document.createElement('div');
+    // // item.classList.add('menu__item');
+    // // item.innerHTML = item2.HTML;
+    // // menuContainer.append(item);
+
+    // // item = document.createElement('div');
+    // // item.classList.add('menu__item');
+    // // item.innerHTML = item3.HTML;
+    // // menuContainer.append(item);
+
+    // // ////// SECOND VARIANT
+    // // for (let i = 0; i < 3; i++) {
+    // //     item = document.createElement('div');
+    // //     item.classList.add('menu__item');
+    // //     item.innerHTML = itemArr[i].HTML;
+    // //     menuContainer.append(item);
+    // // }
     // for (let i = 0; i < 3; i++) {
-    //     item = document.createElement('div');
-    //     item.classList.add('menu__item');
-    //     item.innerHTML = itemArr[i].HTML;
-    //     menuContainer.append(item);
+    //     menuContainer.append(itemArr[i].render());
     // }
-    for (let i = 0; i < 3; i++) {
-        menuContainer.append(itemArr[i].render());
-    }
 
 ///////////////////////////////////////
 //////////////// FORMS ////////////////
@@ -254,9 +273,23 @@ window.addEventListener('DOMContentLoaded', () => {
             thanks: 'Thankssss'
           };
     forms.forEach(item => {
-        postData(item);
+        bindPostData(item);
     });
-    function postData(form) {
+
+    // 5-89
+    const postData = async (url, data) => {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: data // it was JSON.stringify(object) here
+        });
+        return await res.json();
+    };
+
+
+    function bindPostData(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -294,18 +327,20 @@ window.addEventListener('DOMContentLoaded', () => {
                 object[key] = value;
                 // console.log(object[key], value);
             });
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
             // ////// Changed for Fetch
             // const json = JSON.stringify(object);
             // request.send(json);
 
-            fetch('server.php', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(object)
-            }).then(data => data.text())
+            // fetch('server.php', { // changed to http://localhost:3000/requests
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(object)
+            postData('http://localhost:3000/requests', json) // here was "'server.php', JSON.stringify(object))
+            // .then(data => data.text()) // do not needed anymore
             .then(data => {
                 console.log(data);
                 showThanksModal(message.success);
@@ -338,7 +373,7 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    fetch('http://localhost:3000/menu')
-        .then(data => data.json())
-        .then(res => console.log(res));
+    // fetch('http://localhost:3000/menu')
+    //     .then(data => data.json())
+    //     .then(res => console.log(res));
 });
