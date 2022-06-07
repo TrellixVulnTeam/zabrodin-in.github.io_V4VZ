@@ -437,6 +437,9 @@ window.addEventListener('DOMContentLoaded', () => {
     slides.forEach(item => {
         item.style.width = width;
     });
+    function deleteNotDigits(str) {
+        return +str.replace(/\D/g, '');
+    }
     function changeCount(index) {
         (index < 10) ? countCurr.textContent = `0${index}` : countCurr.textContent = `${index}`;
     }
@@ -444,19 +447,19 @@ window.addEventListener('DOMContentLoaded', () => {
     function prevSlide() {
         (slideIndex <= 1) ? slideIndex = slides.length : slideIndex--;
         changeCount(slideIndex);
-        slidesField.style.transform = `translateX(-${(slideIndex - 1) * +width.slice(0, -2)}px)`;
+        slidesField.style.transform = `translateX(-${(slideIndex - 1) * deleteNotDigits(width)}px)`;
         chooseSlide(slideIndex);
     }
     function nextSlide() {
         (slideIndex >= slides.length) ? slideIndex = 1 : slideIndex++;
         changeCount(slideIndex);
-        slidesField.style.transform = `translateX(-${(slideIndex - 1) * +width.slice(0, -2)}px)`;
+        slidesField.style.transform = `translateX(-${(slideIndex - 1) * deleteNotDigits(width)}px)`;
         chooseSlide(slideIndex);
     }
     btnPrev.addEventListener('click', prevSlide);
     btnNext.addEventListener('click', nextSlide);
-////////////////////////////////////////////
-//////////////// SLIDER DOTS ///////////////
+    ////////////////////////////
+    //////// SLIDER DOTS ///////
     const slider = document.querySelector('.offer__slider'),
           dotList = document.createElement('ol');
     dotList.classList.add('carousel-indicators');
@@ -473,16 +476,16 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     dotList.addEventListener('click', (event) => {
         if (event.target.matches('li')) {
-            console.log('asidawind');
-            console.log(event.target.getAttribute('data-carousel-id'));
+            // console.log('asidawind');
+            // console.log(event.target.getAttribute('data-carousel-id'));
             slideIndex = +event.target.getAttribute('data-carousel-id') + 1;
-            console.log(slideIndex);
+            // console.log(slideIndex);
             chooseSlide(slideIndex);
         }
     });
     function chooseSlide(index) {
         changeCount(index);
-        slidesField.style.transform = `translateX(-${(index - 1) * +width.slice(0, -2)}px)`;
+        slidesField.style.transform = `translateX(-${(index - 1) * deleteNotDigits(width)}px)`;
         const dotLi = dotList.querySelectorAll('li');
         dotLi.forEach((elem, id) => {
             if (id == index - 1) {
