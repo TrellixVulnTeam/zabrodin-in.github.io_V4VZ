@@ -60,9 +60,11 @@ const test = time => {
 
 
 ////// PROMISE ALL
-Promise.all([test(1000), test(4000)]).then(() => {
-    console.log('PROMISE ALL');
-});
+Promise.all([test(2000).then(() => console.log('2000 ms')),
+             test(3000).then(() => console.log('3000 ms'))])
+             .then(() => {
+                console.log('PROMISE ALL');
+             });
 
 ////// PROMISE RACE
 Promise.race([test(1000), test(4000)]).then(() => { // .then will start after first func
