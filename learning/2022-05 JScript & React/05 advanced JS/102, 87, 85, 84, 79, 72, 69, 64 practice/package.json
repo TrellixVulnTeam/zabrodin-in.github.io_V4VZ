@@ -12,7 +12,7 @@
   "author": "zabrodin.in",
   "license": "ISC",
   "devDependencies": {
-    "json-server": "^0.17.0"
-  },
-  "dependencies": {}
+    "json-server": "^0.17.0",
+    "webpack-cli": "^4.9.2"
+  }
 }

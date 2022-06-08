@@ -1,163 +1,120 @@
-'use strict';
-window.addEventListener('DOMContentLoaded', () => {
-//////////////////////////////////////
-//////////////// TABS ////////////////
-    const tabs = document.querySelectorAll('.tabheader__item'),
-          tabsContent = document.querySelectorAll('.tabcontent'),
-          tabsParent = document.querySelector('.tabheader__items');
-    
-    function hideTabContent() {
-        tabsContent.forEach(item => {
-            item.classList.add('hide');
-            item.classList.remove('show', 'fade');
-        });
-        tabs.forEach(item => {
-            item.classList.remove('tabheader__item_active');
-            
-        });
-    }
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
-    function showTabContent(i = 0) {
-        tabsContent[i].classList.add('show', 'fade');
-        tabsContent[i].classList.remove('hide');
-        tabs[i].classList.add('tabheader__item_active');
-    }
-    hideTabContent();
-    showTabContent();
+/***/ "./js/modules/calc.js":
+/*!****************************!*\
+  !*** ./js/modules/calc.js ***!
+  \****************************/
+/***/ ((module) => {
 
-    tabsParent.addEventListener('click', (event) => {
-        const target = event.target;
-        if (target && target.classList.contains('tabheader__item')) {
-            console.log('Hello');
-        }
-        tabs.forEach((item, i) => {
-            if (target == item) {
-                hideTabContent();
-                showTabContent(i);
-            }
-        });
-    });
-///////////////////////////////////////
-//////////////// TIMER ////////////////
-    const deadline = '2022-06-28';
-    function getTimeRemaining(endtime) {
-        let daysRemaining,
-            hoursRemaining,
-            minutesRemaining,
-            secondsRemaining;
-        const t = Date.parse(endtime) - Date.parse(new Date());
-        if (t <= 0) {
-            daysRemaining = 0;
-            hoursRemaining = 0;
-            minutesRemaining = 0;
-            secondsRemaining = 0;
-        } else {
-            daysRemaining = Math.floor(t / (1000*60*60*24));
-            hoursRemaining = Math.floor((t/ (1000*60*60*24)) % 24);
-            minutesRemaining = Math.floor((t / 1000 / 60) % 60);
-            secondsRemaining = Math.floor((t / 1000) % 60);
-        }
-        return {
-            'total': t,
-            'days': daysRemaining,
-            'hours': hoursRemaining,
-            'minutes': minutesRemaining,
-            'seconds': secondsRemaining
-        };
+function calculator() {
+    /////////////////////////////////////////////
+    //////////////// CALCULATOR /////////////////
+    let sex, ratio, age, height, weight;
+    if (localStorage.getItem('sex')) {
+        sex = localStorage.getItem('sex');
+    } else {
+        sex = 'female';
+        localStorage.setItem('sex', 'female');
     }
-    function prependZero(num) {
-        if (num < 10 && num >= 0) {
-            return `0${num}`;
-        } else {
-            return num;
-        }
+    if (localStorage.getItem('ratio')) {
+        ratio = localStorage.getItem('ratio');
+    } else {
+        ratio = 1.375;
+        localStorage.setItem('ratio', '1.375');
     }
-    function setClock(selector, endtime) {
-        const timer = document.querySelector(selector),
-            days = timer.querySelector('#days'),
-            hours = timer.querySelector('#hours'),
-            minutes = timer.querySelector('#minutes'),
-            seconds = timer.querySelector('#seconds'),
-            timeInterval = setInterval(updateClock, 1000);
-        updateClock(); // so that the page does not blink
-        function updateClock() {
-            const t = getTimeRemaining(endtime);
-            days.innerHTML = prependZero(t.days);
-            hours.innerHTML = prependZero(t.hours);
-            minutes.innerHTML = prependZero(t.minutes);
-            seconds.innerHTML = prependZero(t.seconds);
-            if (t.total <= 0) {
-                clearInterval(timeInterval);
+    function calcTotal() {
+        const result = document.querySelector('.calculating__result span');
+        if (!sex || !height || !weight || !age || !ratio) {
+            result.textContent = '---';
+        } else {
+            if (sex == 'male') {
+                result.textContent = `${+Math.round(88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age) * ratio)}`;
+            } else {
+                result.textContent = +Math.round(447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age) * ratio);
             }
         }
+        return;
     }
-    setClock('.timer', deadline);
-//////////////////////////////////////////////
-//////////////// MODAL WINDOW ////////////////
-    const connectBtn = document.querySelectorAll('[data-modal]'),
-          modal = document.querySelector('.modal');
-    function openModal() {
-        // modal.style.display = 'block';
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        clearInterval(modalTimerId);
+    function getStaticInfo(parentSelector, activeClass) {
+        const div = document.querySelectorAll(`${parentSelector} div`);
+        div.forEach(elem => {
+            elem.addEventListener('click', (e) => {
+                if (e.target.getAttribute('data-ratio')) {
+                    ratio = +e.target.getAttribute('data-ratio');
+                    localStorage.setItem('ratio', +e.target.getAttribute('data-ratio'));
+                } else {
+                    sex = e.target.getAttribute('id');
+                    localStorage.setItem('sex', e.target.getAttribute('id'));
+                }
+                div.forEach(elem => {
+                    elem.classList.remove(activeClass);
+                });
+                e.target.classList.add(activeClass);
+                calcTotal();
+            });
+        });
+        return;
     }
-    function closeModal() {
-        // modal.style.display = 'none';
-        modal.classList.remove('show');
-        document.body.style.overflow = '';
+    function getDynamicInfo(selector) {
+        const item = document.querySelector(selector);
+        item.addEventListener('input', () => {
+            if (item.value.match(/\D/g)) {
+                item.style.border = '1px solid red';
+            } else {
+                item.style.border = 'none';
+            }
+            switch(item.getAttribute('id')) {
+                case 'weight':
+                    weight = +item.value;
+                    break;
+                case 'height':
+                    height = +item.value;
+                    break;
+                case 'age':
+                    age = +item.value;
+                    break;
+            }
+            calcTotal();
+        });
+        return;
     }
-    connectBtn.forEach((elem) => {
-        elem.addEventListener('click', openModal);
-    });
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal || e.target.getAttribute('data-close') == '') {
-            closeModal();
-        }
-    });
-    document.addEventListener('keydown', (e) => {
-        if ((e.code === 'Escape') && (modal.classList.contains('show'))) {
-            closeModal();
-        }
-    });
-    // setting timer
-    const modalTimerId = setTimeout(openModal, 10000);
-    // opening modal window when user scrolled down to the end of page
-    function showModalByScroll() {
-        if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {
-            openModal();
-            window.removeEventListener('scroll', showModalByScroll);
-        }
+    function initLocalStorage(selector, activeClass) {
+        const div = document.querySelectorAll(`${selector} div`);
+        console.log(div);
+        div.forEach(elem => {
+            elem.classList.remove(activeClass);
+            if (elem.getAttribute('id') === localStorage.getItem('sex')) {
+                elem.classList.add(activeClass);
+            }
+            if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
+                elem.classList.add(activeClass);
+            }
+        });
     }
-    window.addEventListener('scroll', showModalByScroll);
+    initLocalStorage('#gender', 'calculating__choose-item_active');
+    initLocalStorage('.calculating__choose_big', 'calculating__choose-item_active');
+    getStaticInfo('#gender', 'calculating__choose-item_active');
+    getStaticInfo('.calculating__choose_big', 'calculating__choose-item_active');
+    getDynamicInfo('#height');
+    getDynamicInfo('#weight');
+    getDynamicInfo('#age');
+    calcTotal();
+}
 
-    // show loading in the modal
-    function showThanksModal(message) {
-        const prevModalContent = document.querySelector('.modal__dialog');
-        prevModalContent.classList.add('hide');
-        openModal();
-        const thanksModalContent = document.createElement('div');
-        thanksModalContent.classList.add('modal__dialog');
-        thanksModalContent.innerHTML = `
-            <div class="modal__content">
-                <div data-close class="modal__close">×</div>
-                <div class="modal__title">${message}</div>
-            </div>
-        `;
-        document.querySelector('.modal').append(thanksModalContent);
-        setTimeout(() => {
-            thanksModalContent.remove();
-            prevModalContent.classList.remove('hide');
-            closeModal();
-        }, 3000);
-    }
-    
+module.exports = calculator;
 
+/***/ }),
 
+/***/ "./js/modules/classes.js":
+/*!*******************************!*\
+  !*** ./js/modules/classes.js ***!
+  \*******************************/
+/***/ ((module) => {
 
-
-///////////////////////////////////////////////////////////////////
-//////////////// TEMPLATES BY CLASSES (menu__item) ////////////////
+function classes() {
+    ///////////////////////////////////////////////////////////////////
+    //////////////// TEMPLATES BY CLASSES (menu__item) ////////////////
     class MenuCard {
         constructor(imgSrc, alt, title, descr, price, ...classes) {
             this.title = title;
@@ -270,9 +227,21 @@ window.addEventListener('DOMContentLoaded', () => {
     // for (let i = 0; i < 3; i++) {
     //     menuContainer.append(itemArr[i].render());
     // }
+}
 
-///////////////////////////////////////
-//////////////// FORMS ////////////////
+module.exports = classes;
+
+/***/ }),
+
+/***/ "./js/modules/forms.js":
+/*!*****************************!*\
+  !*** ./js/modules/forms.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+function forms() {
+    ///////////////////////////////////////
+    //////////////// FORMS ////////////////
     const forms = document.querySelectorAll('form'),
           message = {
             loading: 'img/form/spinner.svg',
@@ -384,9 +353,93 @@ window.addEventListener('DOMContentLoaded', () => {
     // fetch('http://localhost:3000/menu')
     //     .then(data => data.json())
     //     .then(res => console.log(res));
+}
 
-/////////////////////////////////////////////
-//////////////// SLIDER VER.1 ///////////////
+module.exports = forms;
+
+/***/ }),
+
+/***/ "./js/modules/modal.js":
+/*!*****************************!*\
+  !*** ./js/modules/modal.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+function modal() {
+    //////////////////////////////////////////////
+    //////////////// MODAL WINDOW ////////////////
+    const connectBtn = document.querySelectorAll('[data-modal]'),
+    modal = document.querySelector('.modal');
+    function openModal() {
+        // modal.style.display = 'block';
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        clearInterval(modalTimerId);
+    }
+    function closeModal() {
+        // modal.style.display = 'none';
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    connectBtn.forEach((elem) => {
+        elem.addEventListener('click', openModal);
+    });
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.getAttribute('data-close') == '') {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if ((e.code === 'Escape') && (modal.classList.contains('show'))) {
+            closeModal();
+        }
+    });
+    // setting timer
+    const modalTimerId = setTimeout(openModal, 10000);
+    // opening modal window when user scrolled down to the end of page
+    function showModalByScroll() {
+        if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+    window.addEventListener('scroll', showModalByScroll);
+
+    // show loading in the modal
+    function showThanksModal(message) {
+        const prevModalContent = document.querySelector('.modal__dialog');
+        prevModalContent.classList.add('hide');
+        openModal();
+        const thanksModalContent = document.createElement('div');
+        thanksModalContent.classList.add('modal__dialog');
+        thanksModalContent.innerHTML = `
+        <div class="modal__content">
+            <div data-close class="modal__close">×</div>
+            <div class="modal__title">${message}</div>
+        </div>
+        `;
+        document.querySelector('.modal').append(thanksModalContent);
+        setTimeout(() => {
+            thanksModalContent.remove();
+            prevModalContent.classList.remove('hide');
+            closeModal();
+        }, 3000);
+    }
+}
+
+module.exports = modal;
+
+/***/ }),
+
+/***/ "./js/modules/slider.js":
+/*!******************************!*\
+  !*** ./js/modules/slider.js ***!
+  \******************************/
+/***/ ((module) => {
+
+function slider() {
+    /////////////////////////////////////////////
+    //////////////// SLIDER VER.1 ///////////////
     const slides = document.querySelectorAll('.offer__slide'),
           btnPrev = document.querySelector('.offer__slider-prev'),
           btnNext = document.querySelector('.offer__slider-next'),
@@ -495,96 +548,184 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-/////////////////////////////////////////////
-//////////////// CALCULATOR /////////////////
-    let sex, ratio, age, height, weight;
-    if (localStorage.getItem('sex')) {
-        sex = localStorage.getItem('sex');
-    } else {
-        sex = 'female';
-        localStorage.setItem('sex', 'female');
+}
+
+module.exports = slider;
+
+/***/ }),
+
+/***/ "./js/modules/tabs.js":
+/*!****************************!*\
+  !*** ./js/modules/tabs.js ***!
+  \****************************/
+/***/ ((module) => {
+
+function tabs() {
+    //////////////////////////////////////
+    //////////////// TABS ////////////////
+    const tabs = document.querySelectorAll('.tabheader__item'),
+    tabsContent = document.querySelectorAll('.tabcontent'),
+    tabsParent = document.querySelector('.tabheader__items');
+
+    function hideTabContent() {
+        tabsContent.forEach(item => {
+            item.classList.add('hide');
+            item.classList.remove('show', 'fade');
+        });
+        tabs.forEach(item => {
+            item.classList.remove('tabheader__item_active');
+        
+        });
     }
-    if (localStorage.getItem('ratio')) {
-        ratio = localStorage.getItem('ratio');
-    } else {
-        ratio = 1.375;
-        localStorage.setItem('ratio', '1.375');
+
+    function showTabContent(i = 0) {
+        tabsContent[i].classList.add('show', 'fade');
+        tabsContent[i].classList.remove('hide');
+        tabs[i].classList.add('tabheader__item_active');
     }
-    function calcTotal() {
-        const result = document.querySelector('.calculating__result span');
-        if (!sex || !height || !weight || !age || !ratio) {
-            result.textContent = '---';
+    hideTabContent();
+    showTabContent();
+
+    tabsParent.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target && target.classList.contains('tabheader__item')) {
+            console.log('Hello');
+        }
+        tabs.forEach((item, i) => {
+            if (target == item) {
+                hideTabContent();
+                showTabContent(i);
+            }
+        });
+    });
+}
+
+module.exports = tabs;
+
+/***/ }),
+
+/***/ "./js/modules/timer.js":
+/*!*****************************!*\
+  !*** ./js/modules/timer.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+function timer() {
+    ///////////////////////////////////////
+    //////////////// TIMER ////////////////
+    const deadline = '2022-06-28';
+    function getTimeRemaining(endtime) {
+        let daysRemaining,
+            hoursRemaining,
+            minutesRemaining,
+            secondsRemaining;
+        const t = Date.parse(endtime) - Date.parse(new Date());
+        if (t <= 0) {
+            daysRemaining = 0;
+            hoursRemaining = 0;
+            minutesRemaining = 0;
+            secondsRemaining = 0;
         } else {
-            if (sex == 'male') {
-                result.textContent = `${+Math.round(88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age) * ratio)}`;
-            } else {
-                result.textContent = +Math.round(447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age) * ratio);
+            daysRemaining = Math.floor(t / (1000*60*60*24));
+            hoursRemaining = Math.floor((t/ (1000*60*60*24)) % 24);
+            minutesRemaining = Math.floor((t / 1000 / 60) % 60);
+            secondsRemaining = Math.floor((t / 1000) % 60);
+        }
+        return {
+            'total': t,
+            'days': daysRemaining,
+            'hours': hoursRemaining,
+            'minutes': minutesRemaining,
+            'seconds': secondsRemaining
+        };
+    }
+    function prependZero(num) {
+        if (num < 10 && num >= 0) {
+            return `0${num}`;
+        } else {
+            return num;
+        }
+    }
+    function setClock(selector, endtime) {
+        const timer = document.querySelector(selector),
+            days = timer.querySelector('#days'),
+            hours = timer.querySelector('#hours'),
+            minutes = timer.querySelector('#minutes'),
+            seconds = timer.querySelector('#seconds'),
+            timeInterval = setInterval(updateClock, 1000);
+        updateClock(); // so that the page does not blink
+        function updateClock() {
+            const t = getTimeRemaining(endtime);
+            days.innerHTML = prependZero(t.days);
+            hours.innerHTML = prependZero(t.hours);
+            minutes.innerHTML = prependZero(t.minutes);
+            seconds.innerHTML = prependZero(t.seconds);
+            if (t.total <= 0) {
+                clearInterval(timeInterval);
             }
         }
-        return;
     }
-    function getStaticInfo(parentSelector, activeClass) {
-        const div = document.querySelectorAll(`${parentSelector} div`);
-        div.forEach(elem => {
-            elem.addEventListener('click', (e) => {
-                if (e.target.getAttribute('data-ratio')) {
-                    ratio = +e.target.getAttribute('data-ratio');
-                    localStorage.setItem('ratio', +e.target.getAttribute('data-ratio'));
-                } else {
-                    sex = e.target.getAttribute('id');
-                    localStorage.setItem('sex', e.target.getAttribute('id'));
-                }
-                div.forEach(elem => {
-                    elem.classList.remove(activeClass);
-                });
-                e.target.classList.add(activeClass);
-                calcTotal();
-            });
-        });
-        return;
-    }
-    function getDynamicInfo(selector) {
-        const item = document.querySelector(selector);
-        item.addEventListener('input', () => {
-            if (item.value.match(/\D/g)) {
-                item.style.border = '1px solid red';
-            } else {
-                item.style.border = 'none';
-            }
-            switch(item.getAttribute('id')) {
-                case 'weight':
-                    weight = +item.value;
-                    break;
-                case 'height':
-                    height = +item.value;
-                    break;
-                case 'age':
-                    age = +item.value;
-                    break;
-            }
-            calcTotal();
-        });
-        return;
-    }
-    function initLocalStorage(selector, activeClass) {
-        const div = document.querySelectorAll(`${selector} div`);
-        console.log(div);
-        div.forEach(elem => {
-            elem.classList.remove(activeClass);
-            if (elem.getAttribute('id') === localStorage.getItem('sex')) {
-                elem.classList.add(activeClass);
-            }
-            if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
-                elem.classList.add(activeClass);
-            }
-        });
-    }
-    initLocalStorage('#gender', 'calculating__choose-item_active');
-    initLocalStorage('.calculating__choose_big', 'calculating__choose-item_active');
-    getStaticInfo('#gender', 'calculating__choose-item_active');
-    getStaticInfo('.calculating__choose_big', 'calculating__choose-item_active');
-    getDynamicInfo('#height');
-    getDynamicInfo('#weight');
-    getDynamicInfo('#age');
-    calcTotal();
+    setClock('.timer', deadline);
+}
+
+module.exports = timer;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!**********************!*\
+  !*** ./js/script.js ***!
+  \**********************/
+
+window.addEventListener('DOMContentLoaded', () => {
+    const tabs = __webpack_require__(/*! ./modules/tabs */ "./js/modules/tabs.js");
+    const modal = __webpack_require__(/*! ./modules/modal */ "./js/modules/modal.js");
+    const classes = __webpack_require__(/*! ./modules/classes */ "./js/modules/classes.js");
+    const forms = __webpack_require__(/*! ./modules/forms */ "./js/modules/forms.js");
+    const slider = __webpack_require__(/*! ./modules/slider */ "./js/modules/slider.js");
+    const timer = __webpack_require__(/*! ./modules/timer */ "./js/modules/timer.js");
+    const calc = __webpack_require__(/*! ./modules/calc */ "./js/modules/calc.js");
+
+    tabs();
+    modal();
+    classes();
+    slider();
+    forms();
+    timer();
+    calc();
 });
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=bundle.js.map
