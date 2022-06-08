@@ -27,3 +27,21 @@ const p1 = new Promise((resolve, reject) => {
   }).then(data => {
       console.log(data);
   });
+
+
+
+  const promisify = (item, delay) =>
+    new Promise(resolve => setTimeout(() => resolve(item), delay));
+ 
+const a = () => promisify('a', 100);
+const b = () => promisify('b', 5000);
+const c = () => promisify('c', 3000);
+ 
+async function three() {
+    const outpu1 = await a();
+    const outpu2 = await b();
+    const outpu3 = await c();
+    return `three is done: ${outpu1} ${outpu2} ${outpu3}`
+}
+ 
+three().then(console.log);
