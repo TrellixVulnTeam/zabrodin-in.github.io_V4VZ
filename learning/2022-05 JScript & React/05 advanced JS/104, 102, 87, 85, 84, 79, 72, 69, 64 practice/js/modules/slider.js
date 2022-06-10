@@ -1,11 +1,11 @@
-function slider() {
+function slider({container, slide, nextArr, prevArr, counterTotal, counterCurr, wrapper, field}) {
     /////////////////////////////////////////////
     //////////////// SLIDER VER.1 ///////////////
-    const slides = document.querySelectorAll('.offer__slide'),
-          btnPrev = document.querySelector('.offer__slider-prev'),
-          btnNext = document.querySelector('.offer__slider-next'),
-          countCurr = document.querySelector('#current'),
-          countTotal = document.querySelector('#total');
+    const slides = document.querySelectorAll(slide),
+          btnPrev = document.querySelector(prevArr),
+          btnNext = document.querySelector(nextArr),
+          countCurr = document.querySelector(counterCurr),
+          countTotal = document.querySelector(counterTotal);
     let slideIndex = 1;
     // (slides.length < 10) ? countTotal.textContent = `0${slides.length}` : countTotal.textContent = `${slides.length}`;
     
@@ -39,10 +39,10 @@ function slider() {
 /////////////////////////////////////////////
 //////////////// SLIDER VER.2 ///////////////
     (slides.length < 10) ? countTotal.textContent = `0${slides.length}` : countTotal.textContent = `${slides.length}`;
-    const slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-          slidesField = document.querySelector('.offer__slider-inner'),
+    const slidesWrapper = document.querySelector(wrapper),
+          slidesField = document.querySelector(field),
           width = window.getComputedStyle(slidesWrapper).width;
-    console.log(width);
+    // console.log(width);
     slidesWrapper.style.width = width;
     slidesField.style.display = 'flex';
     slidesField.style.transition = '0.5s all';
@@ -74,7 +74,7 @@ function slider() {
     btnNext.addEventListener('click', nextSlide);
     ////////////////////////////
     //////// SLIDER DOTS ///////
-    const slider = document.querySelector('.offer__slider'),
+    const slider = document.querySelector(container),
           dotList = document.createElement('ol');
     dotList.classList.add('carousel-indicators');
     slider.style.position = 'relative';
@@ -111,4 +111,4 @@ function slider() {
     }
 }
 
-module.exports = slider;
+export default slider;

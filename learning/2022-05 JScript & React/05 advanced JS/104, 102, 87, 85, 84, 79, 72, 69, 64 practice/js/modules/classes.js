@@ -1,3 +1,5 @@
+import {getResources} from '../services/services';
+
 function classes() {
     ///////////////////////////////////////////////////////////////////
     //////////////// TEMPLATES BY CLASSES (menu__item) ////////////////
@@ -39,14 +41,7 @@ function classes() {
         }
     }
 
-    // 5-89
-    const getResources = async (url) => {
-        const res = await fetch(url);
-        if (!res.ok) {
-            throw new Error(`Couldn't fetch ${url}. Status ${res.status}`);
-        }
-        return await res.json();
-    };
+    // here was getResources() >> services.js
     
     // getResources('http://localhost:3000/menu')
     //     .then(data => {
@@ -115,4 +110,4 @@ function classes() {
     // }
 }
 
-module.exports = classes;
+export default classes;

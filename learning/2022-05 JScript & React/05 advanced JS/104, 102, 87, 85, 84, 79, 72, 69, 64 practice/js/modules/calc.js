@@ -72,7 +72,7 @@ function calculator() {
     }
     function initLocalStorage(selector, activeClass) {
         const div = document.querySelectorAll(`${selector} div`);
-        console.log(div);
+        // console.log(div);
         div.forEach(elem => {
             elem.classList.remove(activeClass);
             if (elem.getAttribute('id') === localStorage.getItem('sex')) {
@@ -93,4 +93,4 @@ function calculator() {
     calcTotal();
 }
 
-module.exports = calculator;
+export default calculator;

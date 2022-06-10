@@ -1,7 +1,10 @@
-function forms() {
+import {showThanksModal} from './modal';
+import {postData} from '../services/services';
+
+function forms(formSelector) {
     ///////////////////////////////////////
     //////////////// FORMS ////////////////
-    const forms = document.querySelectorAll('form'),
+    const forms = document.querySelectorAll(formSelector),
           message = {
             loading: 'img/form/spinner.svg',
             success: "Thanks. Soon we'll call you",
@@ -12,17 +15,7 @@ function forms() {
         bindPostData(item);
     });
 
-    // 5-89
-    const postData = async (url, data) => {
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: data // it was JSON.stringify(object) here
-        });
-        return await res.json();
-    };
+    // here was postData(); >> services.js
 
 
     function bindPostData(form) {
@@ -79,10 +72,10 @@ function forms() {
             // .then(data => data.text()) // do not needed anymore
             .then(data => {
                 console.log(data);
-                showThanksModal(message.success);
+                showThanksModal(message.success, '.modal');
                 statusMessage.remove();
             }).catch(() => {
-                showThanksModal(message.failure);
+                showThanksModal(message.failure, '.modal');
             }).finally(() => {
                 form.reset();
             });
@@ -94,7 +87,7 @@ function forms() {
                 if (request.status === 200) {
                     // console.log(request.response);
                     // statusMsg.textContent = message.success;
-                    showThanksModal(message.success);
+                    showThanksModal(message.success, '.modal');
                     statusMessage.remove();
                     form.reset();
                     // setTimeout(() => {
@@ -103,7 +96,7 @@ function forms() {
                 } else {
                     // console.log(request.response);
                     // statusMsg.textContent = message.failure;
-                    showThanksModal(message.failure);
+                    showThanksModal(message.failure, '.modal');
                     statusMessage.remove();
                 }
             });
@@ -114,4 +107,4 @@ function forms() {
     //     .then(res => console.log(res));
 }
 
-module.exports = forms;
+export default forms;
