@@ -14,6 +14,13 @@
 
 
 
+setTimeout(() => {
+    console.log('1');
+}, 0);
+console.log('2');
+
+
+
 const arr = [1,2,3,5,7,90];
 arr.forEach((item, i) => {
     setTimeout(() => {
@@ -21,11 +28,11 @@ arr.forEach((item, i) => {
     }, i * 1000);
 });
 
-let k = 0;
-function count() {
-    for (let i = 0; i < 2e9; i++) {
-        k++;
-    }
-    alert(`done!`);
-}
-count();
+// let k = 0;
+// function count() {
+//     for (let i = 0; i < 2e9; i++) {
+//         k++;
+//     }
+//     alert(`done!`);
+// }
+// count();
