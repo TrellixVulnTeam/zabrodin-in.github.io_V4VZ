@@ -75,3 +75,13 @@ console.log(str.substring(2));
 console.log(str.substring(str.length-4, str.length-1));
 
 
+function tryCallback(arg, callback) {
+    console.log(`Simple text with '${arg}'`);
+    callback('CALLBACK TEXT');
+}
+
+function callbackFunc(arg) {
+    console.log(`Some text with '${arg}'`);
+}
+
+tryCallback('TEST TEXT', callbackFunc);
