@@ -56,3 +56,30 @@ movieDB.movies.forEach((item, index) => {
         </li>
     `;
 });
+
+//////
+//////
+//////
+// ⚠️ link first >> then LI >> then UL >> and NAV
+console.log(document.querySelector(`.promo__menu-item_active`).parentNode.parentNode.parentNode);
+console.log(document.querySelector(`[data-current="3"]`));
+console.log(document.querySelector(`[data-current="3"]`).nextSibling); // textNode (next paragraph)
+
+console.log('////');
+console.log(document.querySelector(`[data-current="3"]`));
+console.log(document.querySelector(`[data-current="3"]`).nextElementSibling);
+
+console.log('////');
+console.log(document.querySelector(`.promo__menu-item_active`).parentElement);
+
+console.log('//// //// //// //// //// //// //// ////');
+console.log(document.body.firstElementChild);
+console.log(document.body.lastElementChild);
+
+console.log('//// FOR OF with childNodes');
+for (let node of document.body.childNodes) {
+    if (node.nodeName == '#text') {
+        continue;
+    }
+    console.log(node);
+}
