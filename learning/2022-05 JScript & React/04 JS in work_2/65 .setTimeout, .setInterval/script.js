@@ -29,10 +29,10 @@ btn.addEventListener(`click`, () => {
 });
 
 //// //// //// ////
-let id = setTimeout(function log() {
-    console.log(`some text`);
-    id = setTimeout(log, 500);
-}, 500);
+// let id = setTimeout(function log() {
+//     console.log(`some text`);
+//     id = setTimeout(log, 500);
+// }, 500);
 
 //// //// //// //// //// //// //// //// //// //// //// ////
 function myAnimation() {
@@ -49,4 +49,4 @@ function myAnimation() {
         }
     }
 }
-btn.addEventListener(`click`, myAnimation);
+// btn.addEventListener(`click`, myAnimation);
