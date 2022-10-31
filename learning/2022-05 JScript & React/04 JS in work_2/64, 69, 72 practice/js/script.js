@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     //// //// //// //// //// //// //// //// timer
-    const endTime = `2022-10-30T23:33`;
+    const endTime = `2022-11-13T00:00`;
 
     function getTimeInfo(endTime) {
         const t = Date.parse(endTime) - Date.parse(new Date());
@@ -102,12 +102,30 @@ window.addEventListener('DOMContentLoaded', function() {
 
     function modalOpenClose() {
         modal.classList.toggle(`show`);
-        document.body.style.overflow = `hidden`;
+        if (modal.classList.contains(`show`)) {
+            document.body.style.overflow = `hidden`;
+        } else {
+            document.body.style.overflow = ``;
+        }
+        clearInterval(modalOpenTimer);
+        window.removeEventListener(`scroll`, modalScrollOpen);
     }
     // OPEN
     modalOpenBtns.forEach((btn) => {
         btn.addEventListener(`click`, modalOpenClose);
     });
+
+    // Open with timer
+    const modalOpenTimer = setTimeout(modalOpenClose, 4000);
+
+    // Open with scroll
+    function modalScrollOpen() {
+        if (document.documentElement.clientHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 1) {
+            modalOpenClose();
+            window.removeEventListener(`scroll`, modalScrollOpen);
+        }
+    }
+    window.addEventListener(`scroll`, modalScrollOpen);
 
     // CLOSE
     modalCloseBtn.addEventListener(`click`, modalOpenClose);
@@ -122,6 +140,6 @@ window.addEventListener('DOMContentLoaded', function() {
         if (e.code === `Escape` && modal.classList.contains(`show`)) {
             modalOpenClose();
         }
-    });
+    }); 
     
 });
