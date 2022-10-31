@@ -94,4 +94,34 @@ window.addEventListener('DOMContentLoaded', function() {
     showTime(`.timer`, endTime);
     console.log(getTimeInfo(endTime));
 
+
+    //// //// //// //// //// //// //// //// MODAL
+    const modal = document.querySelector(`.modal`),
+          modalOpenBtns = document.querySelectorAll(`[data-modal]`),
+          modalCloseBtn = document.querySelector(`[data-modalClose]`);
+
+    function modalOpenClose() {
+        modal.classList.toggle(`show`);
+        document.body.style.overflow = `hidden`;
+    }
+    // OPEN
+    modalOpenBtns.forEach((btn) => {
+        btn.addEventListener(`click`, modalOpenClose);
+    });
+
+    // CLOSE
+    modalCloseBtn.addEventListener(`click`, modalOpenClose);
+    modal.addEventListener(`click`, (e) => {
+        // modal.classList.remove(`show`);
+        // modal.classList.add(`hide`);
+        if (e.target === modal) {
+            modalOpenClose();
+        }
+    });
+    document.addEventListener(`keydown`, (e) => {
+        if (e.code === `Escape` && modal.classList.contains(`show`)) {
+            modalOpenClose();
+        }
+    });
+    
 });
