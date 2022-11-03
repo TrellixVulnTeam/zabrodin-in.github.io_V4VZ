@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     showTime(`.timer`, endTime);
-    console.log(getTimeInfo(endTime));
+    // console.log(getTimeInfo(endTime));
 
 
     //// //// //// //// //// //// //// //// MODAL
@@ -211,14 +211,88 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     //// REST TEST
-    const rest = function(a, b, ...rest) {
-        console.log(a, b, rest);
-    };
-    rest(1, 2, 3, 4, 5, 6);
+    // const rest = function(a, b, ...rest) {
+    //     console.log(a, b, rest);
+    // };
+    // rest(1, 2, 3, 4, 5, 6);
+
     //// DEFAULT PARAMS
     function calcOrDouble(a, b = 2) {
         return a * b;
     }
-    console.log(calcOrDouble(5, 3));
-    console.log(calcOrDouble(5));
+    // console.log(calcOrDouble(5, 3));
+    // console.log(calcOrDouble(5));
+
+    //// //// //// //// //// //// //// //// FORMS
+    const forms = document.querySelectorAll(`form`);
+    
+    const msg = {
+        loading: `Loading..`,
+        success: `Thx, We'll call u soon`,
+        error: `Smth went wrong`
+    };
+
+    forms.forEach(item => {
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener(`submit`, (event) => {
+            event.preventDefault();
+
+            const statusMsg = document.createElement(`div`);
+            statusMsg.classList.add(`status`);
+            statusMsg.textContent = msg.loading;
+            form.append(statusMsg);
+
+            const request = new XMLHttpRequest();
+            request.open(`POST`, `server.php`);
+
+            /*
+            //// //// AS A FORM_DATA //// //// 111
+            // request.setRequestHeader(`Content-type`, `multipart/form-data`);
+            const formData = new FormData(form);
+
+            request.send(formData);
+
+            request.addEventListener(`load`, () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMsg.textContent = msg.success;
+                    form.reset();
+                    setTimeout(() => {
+                        statusMsg.textContent = "";
+                    }, 2000);
+                } else {
+                    statusMsg.textContent = msg.error;
+                }
+            });
+            */
+
+            //// //// AS A JSON //// //// 222
+            request.setRequestHeader(`Content-type`, `application/json`);
+            const formData = new FormData(form);
+            const obj = {};
+            formData.forEach((element, key) => {
+                obj[key] = element;
+            });
+            const json = JSON.stringify(obj);
+
+            request.send(json);
+
+            request.addEventListener(`load`, () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMsg.textContent = msg.success;
+                    form.reset();
+                    setTimeout(() => {
+                        statusMsg.textContent = "";
+                    }, 2000);
+                } else {
+                    statusMsg.textContent = msg.error;
+                }
+            });
+        });
+    }
+
 });
