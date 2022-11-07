@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     showTabContent();
 
-/*
+
     //// //// //// //// //// //// //// //// timer
     const endTime = `2022-11-13T00:00`;
 
@@ -92,10 +92,6 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     showTime(`.timer`, endTime);
-*/
-
-
-
 
 
 
@@ -103,6 +99,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const modal = document.querySelector(`.modal`),
           modalOpenBtns = document.querySelectorAll(`[data-modal]`),
           modalContent = modal.innerHTML;
+    let timeOut;
 
     function modalOpenClose() {
         if (modal.classList.contains(`show`)) {
@@ -115,6 +112,7 @@ window.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = `hidden`;
         }
         clearInterval(modalOpenTimer);
+        clearTimeout(timeOut);
         window.removeEventListener(`scroll`, modalScrollOpen);
     }
     // OPEN
@@ -254,8 +252,12 @@ window.addEventListener('DOMContentLoaded', function() {
             showThanksModal(msg.loading);
             // form.append(spinner);
 
-            const request = new XMLHttpRequest();
-            request.open(`POST`, `server.php`);
+
+            //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// ////  CHANGING TO FETCH
+            //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+
+            // const request = new XMLHttpRequest();
+            // request.open(`POST`, `server.php`);
 
             /*
             //// //// AS A FORM_DATA //// //// 111
@@ -279,16 +281,19 @@ window.addEventListener('DOMContentLoaded', function() {
             */
 
             //// //// AS A JSON //// //// 222
-            request.setRequestHeader(`Content-type`, `application/json`);
+            // request.setRequestHeader(`Content-type`, `application/json`);
             const formData = new FormData(form);
             const obj = {};
             formData.forEach((element, key) => {
                 obj[key] = element;
             });
             const json = JSON.stringify(obj);
+            // console.log(obj);
+            // console.log(JSON.stringify(obj));
 
-            request.send(json);
+            // request.send(json);
 
+            /*
             request.addEventListener(`load`, () => {
                 if (request.status === 200) {
                     console.log(request.response);
@@ -297,6 +302,26 @@ window.addEventListener('DOMContentLoaded', function() {
                 } else {
                     showThanksModal(msg.error);
                 }
+            });
+            */
+
+            //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+            //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+
+            fetch(`server.php1`, {
+                method: `POST`,
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: json // formData
+            }).then(data => data.text())
+            .then(data => {
+                console.log(data);
+                showThanksModal(msg.success);
+            }).catch(() => {
+                showThanksModal(msg.error);
+            }).finally(() => {
+                form.reset();
             });
         });
     }
@@ -316,10 +341,25 @@ window.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = `hidden`;
         }
         if (message == msg.success) {
-            setTimeout(() => {
+            timeOut = setTimeout(() => {
                 modalOpenClose();
             }, 4000);
         }
     }
+
+    //// //// //// //// //// //// //// //// //// //// //// //// 87 FETCH API
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.json())
+    .then(json => console.log(json));
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: `POST`,
+        body: JSON.stringify({name: `Alex`}),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(json => console.log(json));
 
 });
