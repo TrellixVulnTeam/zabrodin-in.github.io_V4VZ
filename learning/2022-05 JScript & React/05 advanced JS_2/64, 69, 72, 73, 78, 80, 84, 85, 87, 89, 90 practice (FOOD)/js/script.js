@@ -411,4 +411,54 @@ window.addEventListener('DOMContentLoaded', function() {
     .then(data => data.json())
     .then(res => console.log(res));
 
+
+
+
+
+
+    /////////////////////////////////////////////////// SLIDER
+    ///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
+    const sliderTabs = document.querySelectorAll(`.offer__slide`),
+          sliderPrev = document.querySelector(`.offer__slider-prev`),
+          sliderNext = document.querySelector(`.offer__slider-next`),
+          sliderCurr = document.querySelector(`#current`),
+          sliderTotal = document.querySelector(`#total`);
+    let sliderIndex = 1;
+
+    sliderTotal.textContent = sliderNumber(sliderTabs.length);
+
+    function sliderSet(num) {
+        sliderIndex = num;
+        if (sliderIndex > sliderTabs.length) {
+            sliderIndex = 1;
+        } else if (sliderIndex < 1) {
+            sliderIndex = sliderTabs.length;
+        }
+        sliderTabs.forEach(item => {
+            item.style.display = `none`;
+        });
+        sliderTabs[sliderIndex - 1].style.display = ``;
+        sliderCurr.textContent = sliderNumber(sliderIndex);
+    }
+
+    sliderSet(sliderIndex);
+
+    sliderPrev.addEventListener(`click`, () => {
+        sliderSet(sliderIndex - 1);
+    });
+    sliderNext.addEventListener(`click`, () => {
+        sliderSet(sliderIndex + 1);
+    });
+
+    function sliderNumber(num) {
+        if (num < 10 && num >= 0) {
+            return `0${num}`;
+        } else if (num < 0) {
+            return `--`;
+        } else {
+            return num;
+        }
+    }
+
 });
