@@ -184,6 +184,21 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    const getData = async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`Can't fetch ${url}, status: ${res.status}`);
+        }
+        return res.json();
+    };
+
+    getData(`http://localhost:3000/menu`)
+    .then(data => {
+        data.forEach(({img, altimg, title, descr, price}) => {
+            new MenuItem(img, altimg, title, descr, price, `[data-menu]`).render();
+        });
+    });
+    /*
     new MenuItem(
         `img/tabs/vegy.jpg`,
         `vegy`,
@@ -209,7 +224,7 @@ window.addEventListener('DOMContentLoaded', function() {
         `15.93`,
         `[data-menu]`
     ).render();
-
+    */
 
     //// REST TEST
     // const rest = function(a, b, ...rest) {
@@ -233,13 +248,25 @@ window.addEventListener('DOMContentLoaded', function() {
         const forms = document.querySelectorAll(`form`);
 
         forms.forEach(item => {
-            postData(item);
+            bindPostData(item);
         });
     }
 
     formsEvent();
 
-    function postData(form) {
+    ////////////////??!!!!!!!!!!!!!!!!!!!!!!!!!! ASYNC/AWAIT
+    const postData = async (url, data) => {
+        const res = await fetch(url, {
+            method: `POST`,
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: data
+        });
+        return res.json();
+    };
+
+    function bindPostData(form) {
         form.addEventListener(`submit`, (event) => {
             event.preventDefault();
 
@@ -283,11 +310,15 @@ window.addEventListener('DOMContentLoaded', function() {
             //// //// AS A JSON //// //// 222
             // request.setRequestHeader(`Content-type`, `application/json`);
             const formData = new FormData(form);
+            /*
             const obj = {};
             formData.forEach((element, key) => {
                 obj[key] = element;
             });
-            const json = JSON.stringify(obj);
+            */
+            // const json = JSON.stringify(obj);
+
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
             // console.log(obj);
             // console.log(JSON.stringify(obj));
 
@@ -308,13 +339,16 @@ window.addEventListener('DOMContentLoaded', function() {
             //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
             //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
 
-            fetch(`server.php1`, {
-                method: `POST`,
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: json // formData
-            }).then(data => data.text())
+            // fetch(`server.php1`, {
+            //     method: `POST`,
+            //     headers: {
+            //         'Content-type': 'application/json'
+            //     },
+            //     body: json // formData
+            // })
+            
+            postData(`http://localhost:3000/requests`, json) // instead of "json" was "JSON.stringify(obj)"
+            // .then(data => data.text())
             .then(data => {
                 console.log(data);
                 showThanksModal(msg.success);
