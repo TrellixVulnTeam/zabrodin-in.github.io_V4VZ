@@ -478,6 +478,33 @@ window.addEventListener('DOMContentLoaded', function() {
     let sliderIndex = 1,
         sliderOffset = 0;
 
+                    /////////////////////////////////////////////////// SLIDER DOTS
+                    ///////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////
+                    slidesWrapper.style.position = `relative`;
+                    const dotsDiv = document.createElement(`div`);
+                    dotsDiv.classList.add(`carousel-indicators`);
+                    slidesWrapper.append(dotsDiv);
+
+                    for (let i = 1; i < sliderTabs.length + 1; i++) {
+                        const dot = document.createElement(`div`);
+                        dot.classList.add(`dot`);
+                        dot.setAttribute(`data-slider-dot`, i);
+                        dotsDiv.append(dot);
+                    }
+
+                    const dots = document.querySelectorAll(`[data-slider-dot]`);
+                    dots.forEach((item, i) => {
+                        if (item.getAttribute(`data-slider-dot`) == sliderIndex) {
+                            item.style.opacity = 1;
+                        } else {
+                            item.style.opacity = 0.5;
+                        }
+                        item.addEventListener(`click`, () => {
+                            sliderScroll(i + 1);
+                        });
+                    });
+
     slidesInner.style.width = 100 * sliderTabs.length + `%`;
     slidesInner.style.display = `flex`;
     sliderTabs.forEach(item => {
@@ -485,7 +512,7 @@ window.addEventListener('DOMContentLoaded', function() {
     });
     slidesWrapper.style.overflow = `hidden`;
 
-    console.log(slidesWrapperWidth.slice(0, -2));
+    // console.log(slidesWrapperWidth.slice(0, -2));
 
     function sliderScroll(num) {
         if (num > sliderTabs.length) {
@@ -498,10 +525,18 @@ window.addEventListener('DOMContentLoaded', function() {
             sliderOffset = (num - 1) * +slidesWrapperWidth.slice(0, -2);
             sliderIndex = num;
         }
-        console.log(sliderOffset);
+        // console.log(sliderOffset);
         slidesInner.style.transform = `translateX(-${sliderOffset}px)`;
         slidesInner.style.transition = `0.5s all`;
         sliderCurr.textContent = sliderNumber(sliderIndex);
+
+        dots.forEach(item => {
+            if (item.getAttribute(`data-slider-dot`) == sliderIndex) {
+                item.style.opacity = 1;
+            } else {
+                item.style.opacity = 0.5;
+            }
+        });
     }
 
     sliderScroll(1);
