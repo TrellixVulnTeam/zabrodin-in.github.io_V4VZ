@@ -192,12 +192,21 @@ window.addEventListener('DOMContentLoaded', function() {
         return res.json();
     };
 
-    getData(`http://localhost:3000/menu`)
+    //////// FETCH API
+    // getData(`http://localhost:3000/menu`)
+    // .then(data => {
+    //     data.forEach(({img, altimg, title, descr, price}) => {
+    //         new MenuItem(img, altimg, title, descr, price, `[data-menu]`).render();
+    //     });
+    // });
+    ///////////////////////////// AXIOS
+    axios.get(`http://localhost:3000/menu`)
     .then(data => {
-        data.forEach(({img, altimg, title, descr, price}) => {
+        data.data.forEach(({img, altimg, title, descr, price}) => {
             new MenuItem(img, altimg, title, descr, price, `[data-menu]`).render();
         });
     });
+    
     /*
     new MenuItem(
         `img/tabs/vegy.jpg`,
