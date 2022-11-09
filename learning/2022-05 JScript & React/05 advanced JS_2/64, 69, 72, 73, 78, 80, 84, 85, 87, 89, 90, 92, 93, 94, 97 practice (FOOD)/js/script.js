@@ -571,9 +571,38 @@ window.addEventListener('DOMContentLoaded', function() {
     const calcResult = document.querySelector(`.calculating__result span`),
           calcGenderParent = document.querySelector(`#gender`),
           calcActivityParent = document.querySelector(`.calculating__choose_big`);
-    let gender = `female`,
-       height, weight, age,
-       activity = 1.375;
+    let gender, height, weight, age, activity, tempElem;
+
+    if (localStorage.getItem(`genderLS`)) {
+        tempElem = document.querySelector(`[data-gender = ${localStorage.getItem(`genderLS`)}]`);
+        gender = localStorage.getItem(`genderLS`);
+        calcResetActivity(calcGenderParent);
+        tempElem.classList.add(`calculating__choose-item_active`);
+    } else {
+        gender = `female`;
+    }
+
+    if (localStorage.getItem(`activityLS`)) {
+        switch (+localStorage.getItem(`activityLS`)) {
+            case (1.2):
+                tempElem = document.querySelector(`#low`);
+                break;
+            case (1.375):
+                tempElem = document.querySelector(`#small`);
+                break;
+            case (1.55):
+                tempElem = document.querySelector(`#medium`);
+                break;
+            case (1.725):
+                tempElem = document.querySelector(`#high`);
+                break;
+        }
+        activity = localStorage.getItem(`activityLS`);
+        calcResetActivity(calcActivityParent);
+        tempElem.classList.add(`calculating__choose-item_active`);
+    } else {
+        activity = 1.375;
+    }
 
     function calcCalculation() {
         if (!gender || !height || !weight || !age || !activity) {
@@ -604,21 +633,27 @@ window.addEventListener('DOMContentLoaded', function() {
                 elem.classList.add(`calculating__choose-item_active`);
                 if (elem.getAttribute(`data-gender`) == `male`) {
                     gender = `male`;
+                    localStorage.setItem(`genderLS`, `male`);
                 } else if (elem.getAttribute(`data-gender`) == `female`) {
                     gender = `female`;
+                    localStorage.setItem(`genderLS`, `female`);
                 } else {
                     switch (elem.getAttribute(`id`)) {
                         case `low`:
                             activity = 1.2;
+                            localStorage.setItem(`activityLS`, 1.2);
                             break;
                         case `small`:
                             activity = 1.375;
+                            localStorage.setItem(`activityLS`, 1.375);
                             break;
                         case `medium`:
                             activity = 1.55;
+                            localStorage.setItem(`activityLS`, 1.55);
                             break;
                         case `high`:
                             activity = 1.725;
+                            localStorage.setItem(`activityLS`, 1.725);
                             break;
                     }
                 }
