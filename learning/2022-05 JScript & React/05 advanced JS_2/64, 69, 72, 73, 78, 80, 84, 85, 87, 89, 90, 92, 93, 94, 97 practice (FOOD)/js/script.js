@@ -563,4 +563,92 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
+    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// CALCULATOR
+    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+    
+    const calcResult = document.querySelector(`.calculating__result span`),
+          calcGenderParent = document.querySelector(`#gender`),
+          calcActivityParent = document.querySelector(`.calculating__choose_big`);
+    let gender = `female`,
+       height, weight, age,
+       activity = 1.375;
+
+    function calcCalculation() {
+        if (!gender || !height || !weight || !age || !activity) {
+            calcResult.textContent = `??`;
+            return;
+        }
+        if (gender == `female`) {
+            calcResult.textContent = Math.floor((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * activity);
+        } else {
+            calcResult.textContent = Math.floor((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * activity);
+        }
+        return;
+    }
+    calcCalculation();
+
+    function calcResetActivity(parent) {
+        const elems = parent.querySelectorAll(`div`);
+        elems.forEach(elem => {
+            elem.classList.remove(`calculating__choose-item_active`);
+        });
+    }
+
+    function calcStaticELements(parent) {
+        const elems = parent.querySelectorAll(`div`);
+        elems.forEach(elem => {
+            elem.addEventListener(`click`, () => {
+                calcResetActivity(parent);
+                elem.classList.add(`calculating__choose-item_active`);
+                if (elem.getAttribute(`data-gender`) == `male`) {
+                    gender = `male`;
+                } else if (elem.getAttribute(`data-gender`) == `female`) {
+                    gender = `female`;
+                } else {
+                    switch (elem.getAttribute(`id`)) {
+                        case `low`:
+                            activity = 1.2;
+                            break;
+                        case `small`:
+                            activity = 1.375;
+                            break;
+                        case `medium`:
+                            activity = 1.55;
+                            break;
+                        case `high`:
+                            activity = 1.725;
+                            break;
+                    }
+                }
+                calcCalculation();
+            });
+        });
+    }
+
+    calcStaticELements(calcGenderParent);
+    calcStaticELements(calcActivityParent);
+
+    function calcAddDynamicEvent(elem) {
+        elem.addEventListener(`input`, () => {
+            switch (elem.getAttribute(`id`)) {
+                case `height`:
+                    height = +elem.value;
+                    break;
+                case `weight`:
+                    weight = +elem.value;
+                    break;
+                case `age`:
+                    age = +elem.value;
+                    break;
+            }
+            calcCalculation();
+        });
+    }
+
+    document.querySelectorAll(`.calculating__choose_medium input`).forEach(item => {
+        calcAddDynamicEvent(item);
+    });
+
 });
