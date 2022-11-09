@@ -514,15 +514,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // console.log(slidesWrapperWidth.slice(0, -2));
 
+    function noLetters(str) {
+        return +str.replace(/\D/g, '');
+    }
+
     function sliderScroll(num) {
         if (num > sliderTabs.length) {
             sliderIndex = 1;
             sliderOffset = 0;
         } else if (num < 1) {
             sliderIndex = sliderTabs.length;
-            sliderOffset = (sliderTabs.length - 1) * +slidesWrapperWidth.slice(0, -2);
+            sliderOffset = (sliderTabs.length - 1) * noLetters(slidesWrapperWidth);
         } else {
-            sliderOffset = (num - 1) * +slidesWrapperWidth.slice(0, -2);
+            sliderOffset = (num - 1) * noLetters(slidesWrapperWidth);
             sliderIndex = num;
         }
         // console.log(sliderOffset);
