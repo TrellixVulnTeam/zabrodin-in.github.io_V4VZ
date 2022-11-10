@@ -1,150 +1,147 @@
-'use strict';
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
-window.addEventListener('DOMContentLoaded', function() {
+/***/ "./js/modules/calc.js":
+/*!****************************!*\
+  !*** ./js/modules/calc.js ***!
+  \****************************/
+/***/ ((module) => {
 
-    //// //// //// //// //// //// //// //// tabs on top
-    const tabContents = document.querySelectorAll(`.tabcontent`),
-        tabHeader = document.querySelector(`.tabheader__items`),
-        tabLinks = tabHeader.querySelectorAll(`.tabheader__item`);
-
-    function hideTabContent() {
-        tabContents.forEach(item => {
-            item.style.display = 'none';
-        });
-        tabLinks.forEach(item => {
-            item.classList.remove(`tabheader__item_active`);
-        });
-    }
-
-    function showTabContent(tabNumber = 0) {
-        hideTabContent();
-        tabContents.forEach((item, i) => {
-            if (tabNumber == i) {
-                item.style.display = 'block';
-                tabLinks[i].classList.add(`tabheader__item_active`);
-            }
-        });
-    }
-
-    tabHeader.addEventListener(`click`, (element) => {
-        const target = element.target;
-        if (target && target.classList.contains(`tabheader__item`)) {
-            tabLinks.forEach((item, i) => {
-                if (target == item) {
-                    showTabContent(i);
-                }
-            });
-        }
-    });
-
-    showTabContent();
-
-
-    //// //// //// //// //// //// //// //// timer
-    const endTime = `2022-11-13T00:00`;
-
-    function getTimeInfo(endTime) {
-        const t = Date.parse(endTime) - Date.parse(new Date());
-        let days, hours, minutes, seconds;
-
-        if (t <= 0) {
-            days = hours = minutes = seconds = 0;
-        } else {
-            days = Math.floor(t / 1000 / 60 / 60 / 24);
-            hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-            minutes = Math.floor((t / (1000 * 60)) % 60);
-            seconds = Math.floor((t / 1000) % 60);
-        }
-
-        return {
-            total: t,
-            days: days,
-            hours: hours,
-            minutes: minutes,
-            seconds: seconds
-        };
-    }
-
-    function getZero(num) {
-        if (num >= 0 && num < 10) {
-            return `0${num}`;
-        } else {
-            return num;
-        }
-    }
-
-    function showTime(selector, endTime) {
-        function showTimeRefresh() {
-            const sel = document.querySelector(selector),
-                  get = getTimeInfo(endTime);
-            
-                  sel.querySelector(`#days`).innerHTML = getZero(get.days);
-            sel.querySelector(`#hours`).innerHTML = getZero(get.hours);
-            sel.querySelector(`#minutes`).innerHTML = getZero(get.minutes);
-            sel.querySelector(`#seconds`).innerHTML = getZero(get.seconds);
-            
-            if (get.total <= 0) {
-                clearInterval(interval);
-            }
-        }
-        const interval = setInterval(showTimeRefresh, 1000);
-        showTimeRefresh();
-    }
-
-    showTime(`.timer`, endTime);
-
-
-
-    //// //// //// //// //// //// //// //// MODAL
-    const modal = document.querySelector(`.modal`),
-          modalOpenBtns = document.querySelectorAll(`[data-modal]`),
-          modalContent = modal.innerHTML;
-    let timeOut;
-
-    function modalOpenClose() {
-        if (modal.classList.contains(`show`)) {
-            modal.classList.remove(`show`);
-            document.body.style.overflow = ``;
-            modal.innerHTML = modalContent;
-            formsEvent();
-        } else {
-            modal.classList.add(`show`);
-            document.body.style.overflow = `hidden`;
-        }
-        clearInterval(modalOpenTimer);
-        clearTimeout(timeOut);
-        window.removeEventListener(`scroll`, modalScrollOpen);
-    }
-    // OPEN
-    modalOpenBtns.forEach((btn) => {
-        btn.addEventListener(`click`, modalOpenClose);
-    });
-
-    // Open with timer
-    const modalOpenTimer = setTimeout(modalOpenClose, 10000);
-
-    // Open with scroll
-    function modalScrollOpen() {
-        if (document.documentElement.clientHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 1) {
-            modalOpenClose();
-            window.removeEventListener(`scroll`, modalScrollOpen);
-        }
-    }
-    window.addEventListener(`scroll`, modalScrollOpen);
-
-    // CLOSE
-    modal.addEventListener(`click`, (e) => {
-        if (e.target === modal || e.target.getAttribute(`data-modalClose`) == ``) {
-            modalOpenClose();
-        }
-    });
-    document.addEventListener(`keydown`, (e) => {
-        if (e.code === `Escape` && modal.classList.contains(`show`)) {
-            modalOpenClose();
-        }
-    }); 
-   
+function calc() {
+    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// CALCULATOR
+    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
     
+    const calcResult = document.querySelector(`.calculating__result span`),
+          calcGenderParent = document.querySelector(`#gender`),
+          calcActivityParent = document.querySelector(`.calculating__choose_big`);
+    let gender, height, weight, age, activity, tempElem;
+
+    if (localStorage.getItem(`genderLS`)) {
+        tempElem = document.querySelector(`[data-gender = ${localStorage.getItem(`genderLS`)}]`);
+        gender = localStorage.getItem(`genderLS`);
+        calcResetActivity(calcGenderParent);
+        tempElem.classList.add(`calculating__choose-item_active`);
+    } else {
+        gender = `female`;
+    }
+
+    if (localStorage.getItem(`activityLS`)) {
+        switch (+localStorage.getItem(`activityLS`)) {
+            case (1.2):
+                tempElem = document.querySelector(`#low`);
+                break;
+            case (1.375):
+                tempElem = document.querySelector(`#small`);
+                break;
+            case (1.55):
+                tempElem = document.querySelector(`#medium`);
+                break;
+            case (1.725):
+                tempElem = document.querySelector(`#high`);
+                break;
+        }
+        activity = localStorage.getItem(`activityLS`);
+        calcResetActivity(calcActivityParent);
+        tempElem.classList.add(`calculating__choose-item_active`);
+    } else {
+        activity = 1.375;
+    }
+
+    function calcCalculation() {
+        if (!gender || !height || !weight || !age || !activity) {
+            calcResult.textContent = `??`;
+            return;
+        }
+        if (gender == `female`) {
+            calcResult.textContent = Math.floor((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * activity);
+        } else {
+            calcResult.textContent = Math.floor((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * activity);
+        }
+        return;
+    }
+    calcCalculation();
+
+    function calcResetActivity(parent) {
+        const elems = parent.querySelectorAll(`div`);
+        elems.forEach(elem => {
+            elem.classList.remove(`calculating__choose-item_active`);
+        });
+    }
+
+    function calcStaticELements(parent) {
+        const elems = parent.querySelectorAll(`div`);
+        elems.forEach(elem => {
+            elem.addEventListener(`click`, () => {
+                calcResetActivity(parent);
+                elem.classList.add(`calculating__choose-item_active`);
+                if (elem.getAttribute(`data-gender`) == `male`) {
+                    gender = `male`;
+                    localStorage.setItem(`genderLS`, `male`);
+                } else if (elem.getAttribute(`data-gender`) == `female`) {
+                    gender = `female`;
+                    localStorage.setItem(`genderLS`, `female`);
+                } else {
+                    switch (elem.getAttribute(`id`)) {
+                        case `low`:
+                            activity = 1.2;
+                            localStorage.setItem(`activityLS`, 1.2);
+                            break;
+                        case `small`:
+                            activity = 1.375;
+                            localStorage.setItem(`activityLS`, 1.375);
+                            break;
+                        case `medium`:
+                            activity = 1.55;
+                            localStorage.setItem(`activityLS`, 1.55);
+                            break;
+                        case `high`:
+                            activity = 1.725;
+                            localStorage.setItem(`activityLS`, 1.725);
+                            break;
+                    }
+                }
+                calcCalculation();
+            });
+        });
+    }
+
+    calcStaticELements(calcGenderParent);
+    calcStaticELements(calcActivityParent);
+
+    function calcAddDynamicEvent(elem) {
+        elem.addEventListener(`input`, () => {
+            switch (elem.getAttribute(`id`)) {
+                case `height`:
+                    height = +elem.value;
+                    break;
+                case `weight`:
+                    weight = +elem.value;
+                    break;
+                case `age`:
+                    age = +elem.value;
+                    break;
+            }
+            calcCalculation();
+        });
+    }
+
+    document.querySelectorAll(`.calculating__choose_medium input`).forEach(item => {
+        calcAddDynamicEvent(item);
+    });
+}
+
+module.exports = calc;
+
+/***/ }),
+
+/***/ "./js/modules/cards.js":
+/*!*****************************!*\
+  !*** ./js/modules/cards.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+function cards() {
     //// //// //// //// //// //// //// //// CLASSES FOR TABS IN THE BOTTOM
     class MenuItem {
         constructor(imgSrc, alt, title, descr, price, parentSelector, ...classes) {
@@ -245,7 +242,19 @@ window.addEventListener('DOMContentLoaded', function() {
     function calcOrDouble(a, b = 2) {
         return a * b;
     }
+}
 
+module.exports = cards;
+
+/***/ }),
+
+/***/ "./js/modules/forms.js":
+/*!*****************************!*\
+  !*** ./js/modules/forms.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+function forms() {
     //// //// //// //// //// //// //// //// FORMS
     const msg = {
         loading: `Loading.. <img src="img/form/spinner.svg" style="display: block; margin: auto;">`,
@@ -410,11 +419,80 @@ window.addEventListener('DOMContentLoaded', function() {
     fetch(`http://localhost:3000/menu`)
     .then(data => data.json())
     .then(res => console.log(res));
+}
 
+module.exports = forms;
 
+/***/ }),
 
+/***/ "./js/modules/modal.js":
+/*!*****************************!*\
+  !*** ./js/modules/modal.js ***!
+  \*****************************/
+/***/ ((module) => {
 
+function modal() {
+    //// //// //// //// //// //// //// //// MODAL
+    const modal = document.querySelector(`.modal`),
+          modalOpenBtns = document.querySelectorAll(`[data-modal]`),
+          modalContent = modal.innerHTML;
+    let timeOut;
 
+    function modalOpenClose() {
+        if (modal.classList.contains(`show`)) {
+            modal.classList.remove(`show`);
+            document.body.style.overflow = ``;
+            modal.innerHTML = modalContent;
+            formsEvent();
+        } else {
+            modal.classList.add(`show`);
+            document.body.style.overflow = `hidden`;
+        }
+        clearInterval(modalOpenTimer);
+        clearTimeout(timeOut);
+        window.removeEventListener(`scroll`, modalScrollOpen);
+    }
+    // OPEN
+    modalOpenBtns.forEach((btn) => {
+        btn.addEventListener(`click`, modalOpenClose);
+    });
+
+    // Open with timer
+    const modalOpenTimer = setTimeout(modalOpenClose, 10000);
+
+    // Open with scroll
+    function modalScrollOpen() {
+        if (document.documentElement.clientHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 1) {
+            modalOpenClose();
+            window.removeEventListener(`scroll`, modalScrollOpen);
+        }
+    }
+    window.addEventListener(`scroll`, modalScrollOpen);
+
+    // CLOSE
+    modal.addEventListener(`click`, (e) => {
+        if (e.target === modal || e.target.getAttribute(`data-modalClose`) == ``) {
+            modalOpenClose();
+        }
+    });
+    document.addEventListener(`keydown`, (e) => {
+        if (e.code === `Escape` && modal.classList.contains(`show`)) {
+            modalOpenClose();
+        }
+    }); 
+}
+
+module.exports = modal;
+
+/***/ }),
+
+/***/ "./js/modules/slider.js":
+/*!******************************!*\
+  !*** ./js/modules/slider.js ***!
+  \******************************/
+/***/ ((module) => {
+
+function slider() {
     /*
     /////////////////////////////////////////////////// SLIDER 1
     ///////////////////////////////////////////////////
@@ -562,128 +640,183 @@ window.addEventListener('DOMContentLoaded', function() {
             return num;
         }
     }
+}
 
+module.exports = slider;
 
-    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// CALCULATOR
-    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
-    //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
-    
-    const calcResult = document.querySelector(`.calculating__result span`),
-          calcGenderParent = document.querySelector(`#gender`),
-          calcActivityParent = document.querySelector(`.calculating__choose_big`);
-    let gender, height, weight, age, activity, tempElem;
+/***/ }),
 
-    if (localStorage.getItem(`genderLS`)) {
-        tempElem = document.querySelector(`[data-gender = ${localStorage.getItem(`genderLS`)}]`);
-        gender = localStorage.getItem(`genderLS`);
-        calcResetActivity(calcGenderParent);
-        tempElem.classList.add(`calculating__choose-item_active`);
-    } else {
-        gender = `female`;
-    }
+/***/ "./js/modules/tabs.js":
+/*!****************************!*\
+  !*** ./js/modules/tabs.js ***!
+  \****************************/
+/***/ ((module) => {
 
-    if (localStorage.getItem(`activityLS`)) {
-        switch (+localStorage.getItem(`activityLS`)) {
-            case (1.2):
-                tempElem = document.querySelector(`#low`);
-                break;
-            case (1.375):
-                tempElem = document.querySelector(`#small`);
-                break;
-            case (1.55):
-                tempElem = document.querySelector(`#medium`);
-                break;
-            case (1.725):
-                tempElem = document.querySelector(`#high`);
-                break;
-        }
-        activity = localStorage.getItem(`activityLS`);
-        calcResetActivity(calcActivityParent);
-        tempElem.classList.add(`calculating__choose-item_active`);
-    } else {
-        activity = 1.375;
-    }
+function tabs() {
+//// //// //// //// //// //// //// //// tabs on top
+    const tabContents = document.querySelectorAll(`.tabcontent`),
+        tabHeader = document.querySelector(`.tabheader__items`),
+        tabLinks = tabHeader.querySelectorAll(`.tabheader__item`);
 
-    function calcCalculation() {
-        if (!gender || !height || !weight || !age || !activity) {
-            calcResult.textContent = `??`;
-            return;
-        }
-        if (gender == `female`) {
-            calcResult.textContent = Math.floor((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * activity);
-        } else {
-            calcResult.textContent = Math.floor((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * activity);
-        }
-        return;
-    }
-    calcCalculation();
-
-    function calcResetActivity(parent) {
-        const elems = parent.querySelectorAll(`div`);
-        elems.forEach(elem => {
-            elem.classList.remove(`calculating__choose-item_active`);
+    function hideTabContent() {
+        tabContents.forEach(item => {
+            item.style.display = 'none';
+        });
+        tabLinks.forEach(item => {
+            item.classList.remove(`tabheader__item_active`);
         });
     }
 
-    function calcStaticELements(parent) {
-        const elems = parent.querySelectorAll(`div`);
-        elems.forEach(elem => {
-            elem.addEventListener(`click`, () => {
-                calcResetActivity(parent);
-                elem.classList.add(`calculating__choose-item_active`);
-                if (elem.getAttribute(`data-gender`) == `male`) {
-                    gender = `male`;
-                    localStorage.setItem(`genderLS`, `male`);
-                } else if (elem.getAttribute(`data-gender`) == `female`) {
-                    gender = `female`;
-                    localStorage.setItem(`genderLS`, `female`);
-                } else {
-                    switch (elem.getAttribute(`id`)) {
-                        case `low`:
-                            activity = 1.2;
-                            localStorage.setItem(`activityLS`, 1.2);
-                            break;
-                        case `small`:
-                            activity = 1.375;
-                            localStorage.setItem(`activityLS`, 1.375);
-                            break;
-                        case `medium`:
-                            activity = 1.55;
-                            localStorage.setItem(`activityLS`, 1.55);
-                            break;
-                        case `high`:
-                            activity = 1.725;
-                            localStorage.setItem(`activityLS`, 1.725);
-                            break;
-                    }
-                }
-                calcCalculation();
-            });
-        });
-    }
-
-    calcStaticELements(calcGenderParent);
-    calcStaticELements(calcActivityParent);
-
-    function calcAddDynamicEvent(elem) {
-        elem.addEventListener(`input`, () => {
-            switch (elem.getAttribute(`id`)) {
-                case `height`:
-                    height = +elem.value;
-                    break;
-                case `weight`:
-                    weight = +elem.value;
-                    break;
-                case `age`:
-                    age = +elem.value;
-                    break;
+    function showTabContent(tabNumber = 0) {
+        hideTabContent();
+        tabContents.forEach((item, i) => {
+            if (tabNumber == i) {
+                item.style.display = 'block';
+                tabLinks[i].classList.add(`tabheader__item_active`);
             }
-            calcCalculation();
         });
     }
 
-    document.querySelectorAll(`.calculating__choose_medium input`).forEach(item => {
-        calcAddDynamicEvent(item);
+    tabHeader.addEventListener(`click`, (element) => {
+        const target = element.target;
+        if (target && target.classList.contains(`tabheader__item`)) {
+            tabLinks.forEach((item, i) => {
+                if (target == item) {
+                    showTabContent(i);
+                }
+            });
+        }
     });
 
+    showTabContent();
+}
+
+module.exports = tabs;
+
+/***/ }),
+
+/***/ "./js/modules/timer.js":
+/*!*****************************!*\
+  !*** ./js/modules/timer.js ***!
+  \*****************************/
+/***/ ((module) => {
+
+function timer() {
+    //// //// //// //// //// //// //// //// timer
+    const endTime = `2022-11-13T00:00`;
+
+    function getTimeInfo(endTime) {
+        const t = Date.parse(endTime) - Date.parse(new Date());
+        let days, hours, minutes, seconds;
+
+        if (t <= 0) {
+            days = hours = minutes = seconds = 0;
+        } else {
+            days = Math.floor(t / 1000 / 60 / 60 / 24);
+            hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            minutes = Math.floor((t / (1000 * 60)) % 60);
+            seconds = Math.floor((t / 1000) % 60);
+        }
+
+        return {
+            total: t,
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+        };
+    }
+
+    function getZero(num) {
+        if (num >= 0 && num < 10) {
+            return `0${num}`;
+        } else {
+            return num;
+        }
+    }
+
+    function showTime(selector, endTime) {
+        function showTimeRefresh() {
+            const sel = document.querySelector(selector),
+                  get = getTimeInfo(endTime);
+            
+                  sel.querySelector(`#days`).innerHTML = getZero(get.days);
+            sel.querySelector(`#hours`).innerHTML = getZero(get.hours);
+            sel.querySelector(`#minutes`).innerHTML = getZero(get.minutes);
+            sel.querySelector(`#seconds`).innerHTML = getZero(get.seconds);
+            
+            if (get.total <= 0) {
+                clearInterval(interval);
+            }
+        }
+        const interval = setInterval(showTimeRefresh, 1000);
+        showTimeRefresh();
+    }
+
+    showTime(`.timer`, endTime);
+}
+
+module.exports = timer;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!**********************!*\
+  !*** ./js/script.js ***!
+  \**********************/
+
+
+window.addEventListener('DOMContentLoaded', function() {
+
+    const tabs = __webpack_require__(/*! ./modules/tabs */ "./js/modules/tabs.js"),
+          modal = __webpack_require__(/*! ./modules/modal */ "./js/modules/modal.js"),
+          timer = __webpack_require__(/*! ./modules/timer */ "./js/modules/timer.js"),
+          cards = __webpack_require__(/*! ./modules/cards */ "./js/modules/cards.js"),
+          calc = __webpack_require__(/*! ./modules/calc */ "./js/modules/calc.js"),
+          forms = __webpack_require__(/*! ./modules/forms */ "./js/modules/forms.js"),
+          slider = __webpack_require__(/*! ./modules/slider */ "./js/modules/slider.js");
+
+    tabs();
+    modal();
+    timer();
+    cards();
+    calc();
+    forms();
+    slider();
+    
 });
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=bundle.js.map
