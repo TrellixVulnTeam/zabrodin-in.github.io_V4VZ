@@ -1,15 +1,15 @@
-function tabs() {
+function tabs(tabContentSelector, tabHeaderSelector, tabLinksSelector, tabActiveClass) {
 //// //// //// //// //// //// //// //// tabs on top
-    const tabContents = document.querySelectorAll(`.tabcontent`),
-        tabHeader = document.querySelector(`.tabheader__items`),
-        tabLinks = tabHeader.querySelectorAll(`.tabheader__item`);
+    const tabContents = document.querySelectorAll(tabContentSelector),
+        tabHeader = document.querySelector(tabHeaderSelector),
+        tabLinks = tabHeader.querySelectorAll(`.${tabLinksSelector}`);
 
     function hideTabContent() {
         tabContents.forEach(item => {
             item.style.display = 'none';
         });
         tabLinks.forEach(item => {
-            item.classList.remove(`tabheader__item_active`);
+            item.classList.remove(tabActiveClass);
         });
     }
 
@@ -18,14 +18,14 @@ function tabs() {
         tabContents.forEach((item, i) => {
             if (tabNumber == i) {
                 item.style.display = 'block';
-                tabLinks[i].classList.add(`tabheader__item_active`);
+                tabLinks[i].classList.add(tabActiveClass);
             }
         });
     }
 
     tabHeader.addEventListener(`click`, (element) => {
         const target = element.target;
-        if (target && target.classList.contains(`tabheader__item`)) {
+        if (target && target.classList.contains(tabLinksSelector)) {
             tabLinks.forEach((item, i) => {
                 if (target == item) {
                     showTabContent(i);
@@ -37,4 +37,4 @@ function tabs() {
     showTabContent();
 }
 
-module.exports = tabs;
+export default tabs;

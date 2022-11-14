@@ -1,4 +1,4 @@
-function slider() {
+function slider({sliderTabsSel, sliderPrevSel, sliderNextSel, sliderCurrSel, sliderTotalSel, slidesWrapperSel, slidesInnerSel}) {
     /*
     /////////////////////////////////////////////////// SLIDER 1
     ///////////////////////////////////////////////////
@@ -51,13 +51,13 @@ function slider() {
     /////////////////////////////////////////////////// SLIDER 2
     ///////////////////////////////////////////////////
     ///////////////////////////////////////////////////
-    const sliderTabs = document.querySelectorAll(`.offer__slide`),
-          sliderPrev = document.querySelector(`.offer__slider-prev`),
-          sliderNext = document.querySelector(`.offer__slider-next`),
-          sliderCurr = document.querySelector(`#current`),
-          sliderTotal = document.querySelector(`#total`),
-          slidesWrapper = document.querySelector(`.offer__slider-wrapper`),
-          slidesInner = document.querySelector(`.offer__slider-inner`),
+    const sliderTabs = document.querySelectorAll(sliderTabsSel),
+          sliderPrev = document.querySelector(sliderPrevSel),
+          sliderNext = document.querySelector(sliderNextSel),
+          sliderCurr = document.querySelector(sliderCurrSel),
+          sliderTotal = document.querySelector(sliderTotalSel),
+          slidesWrapper = document.querySelector(slidesWrapperSel),
+          slidesInner = document.querySelector(slidesInnerSel),
           slidesWrapperWidth = window.getComputedStyle(slidesWrapper).width;
     let sliderIndex = 1,
         sliderOffset = 0;
@@ -148,4 +148,4 @@ function slider() {
     }
 }
 
-module.exports = slider;
+export default slider;

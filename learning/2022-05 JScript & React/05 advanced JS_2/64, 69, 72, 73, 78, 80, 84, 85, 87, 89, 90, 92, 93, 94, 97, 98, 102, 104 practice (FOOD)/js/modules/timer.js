@@ -1,6 +1,6 @@
-function timer() {
+function timer(timerSelector, timerEndTime) {
     //// //// //// //// //// //// //// //// timer
-    const endTime = `2022-11-13T00:00`;
+    const endTime = timerEndTime;
 
     function getTimeInfo(endTime) {
         const t = Date.parse(endTime) - Date.parse(new Date());
@@ -50,7 +50,7 @@ function timer() {
         showTimeRefresh();
     }
 
-    showTime(`.timer`, endTime);
+    showTime(timerSelector, endTime);
 }
 
-module.exports = timer;
+export default timer;

@@ -1,4 +1,62 @@
-function forms() {
+import {postData} from '../services/services';
+
+function modalAndForms(modalSelector, modalBtnsSelector, formsSelector) {
+    //// //// //// //// //// //// //// //// MODAL
+    const modal = document.querySelector(modalSelector),
+          modalOpenBtns = document.querySelectorAll(modalBtnsSelector),
+          modalContent = modal.innerHTML;
+    let timeOut;
+
+    function modalOpenClose() {
+
+        if (modal.classList.contains(`show`)) {
+            modal.classList.remove(`show`);
+            document.body.style.overflow = ``;
+            modal.innerHTML = modalContent;
+            formsEvent();
+        } else {
+            modal.classList.add(`show`);
+            document.body.style.overflow = `hidden`;
+        }
+        clearInterval(modalOpenTimer);
+        clearTimeout(timeOut);
+        window.removeEventListener(`scroll`, modalScrollOpen);
+    }
+
+    // OPEN
+    modalOpenBtns.forEach((btn) => {
+        btn.addEventListener(`click`, modalOpenClose);
+    });
+
+    // Open with timer
+    const modalOpenTimer = setTimeout(modalOpenClose, 10000);
+
+    // Open with scroll
+    function modalScrollOpen() {
+        if (document.documentElement.clientHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 1) {
+            modalOpenClose();
+            window.removeEventListener(`scroll`, modalScrollOpen);
+        }
+    }
+    window.addEventListener(`scroll`, modalScrollOpen);
+
+    // CLOSE
+    modal.addEventListener(`click`, (e) => {
+        if (e.target === modal || e.target.getAttribute(`data-modalClose`) == ``) {
+            modalOpenClose();
+        }
+    });
+    document.addEventListener(`keydown`, (e) => {
+        if (e.code === `Escape` && modal.classList.contains(`show`)) {
+            modalOpenClose();
+        }
+    }); 
+
+
+
+
+
+
     //// //// //// //// //// //// //// //// FORMS
     const msg = {
         loading: `Loading.. <img src="img/form/spinner.svg" style="display: block; margin: auto;">`,
@@ -7,7 +65,7 @@ function forms() {
     };
 
     function formsEvent() {
-        const forms = document.querySelectorAll(`form`);
+        const forms = document.querySelectorAll(formsSelector);
 
         forms.forEach(item => {
             bindPostData(item);
@@ -16,17 +74,7 @@ function forms() {
 
     formsEvent();
 
-    ////////////////??!!!!!!!!!!!!!!!!!!!!!!!!!! ASYNC/AWAIT
-    const postData = async (url, data) => {
-        const res = await fetch(url, {
-            method: `POST`,
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: data
-        });
-        return res.json();
-    };
+
 
     function bindPostData(form) {
         form.addEventListener(`submit`, (event) => {
@@ -165,4 +213,4 @@ function forms() {
     .then(res => console.log(res));
 }
 
-module.exports = forms;
+export default modalAndForms;

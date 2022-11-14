@@ -102,6 +102,11 @@ function calc() {
 
     function calcAddDynamicEvent(elem) {
         elem.addEventListener(`input`, () => {
+            if (elem.value.match(/\D/)) {
+                elem.style.border = `1px red solid`;
+            } else {
+                elem.style.border = `none`;
+            }
             switch (elem.getAttribute(`id`)) {
                 case `height`:
                     height = +elem.value;
@@ -122,4 +127,4 @@ function calc() {
     });
 }
 
-module.exports = calc;
+export default calc;
