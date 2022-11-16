@@ -1,4 +1,5 @@
-import React from 'react';
+//// task 121, 122
+/* import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -23,4 +24,19 @@ root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
+); */
+
+
+
+//// task 123
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
