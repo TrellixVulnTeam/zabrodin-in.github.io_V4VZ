@@ -1,4 +1,5 @@
-import React from 'react';
+// import React from 'react';
+import {Component, StrictMode} from 'react';
 import './App.css';
 
 const Header = () => {
@@ -16,7 +17,8 @@ const Header = () => {
         style={styledField}/>
 } */
 
-class Field extends React.Component {
+// class Field extends React.Component {
+class Field extends Component {
   render() {
     const holder = 'Enter here';
     const styledField = {
@@ -46,7 +48,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Header />
+        <StrictMode>
+          <Header />
+        </StrictMode>
         <Field />
         <Btn />
       </header>
