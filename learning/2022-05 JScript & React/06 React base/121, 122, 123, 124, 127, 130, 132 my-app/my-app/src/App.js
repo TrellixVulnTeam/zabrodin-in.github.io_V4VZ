@@ -51,8 +51,10 @@ function App() {
         <StrictMode>
           <Header />
         </StrictMode>
-        <Field />
-        <Btn />
+        <div>
+          <Field />
+          <Btn />
+        </div>
         <WhoAmI name='John' surname='Shepard' link='http://facebook.com' />
         <WhoAmI name='John2' surname='NeShepard' link='http://facebook.com' />
       </header>
@@ -67,28 +69,52 @@ class WhoAmI extends Component {
     super(props);
     this.state = {
       years: 27,
-      text: '+++'
-    }
+      text: '+++',
+      position: ''
+    };
+    // BINDING
+    this.nextYear = this.nextYear.bind(this)
   }
-  nextYear = () => {
+
+  // BINDING
+  nextYear() {
     this.setState({
       years: this.state.years + 1,
       text: this.state.text + '+'
     })
   }
+
+  // ARROW FUNC
   prevYear = () => {
     this.setState(state => ({
       years: state.years - 1
     }))
   }
+
+  commitInputChanges = (e, param) => {
+    console.log(param + this.state.position);
+    this.setState({
+      position: e.target.value
+    });
+  }
+
   render() {
-    const {name, surname, link} = this.props;
+    const {name, surname, link} = this.props,
+          {years, position} = this.state;
     return (
       <div>
+        <hr />
         <button onClick={this.prevYear}>---</button>
         <button onClick={this.nextYear}>{this.state.text}</button>
-        <h1>My name is {name}, surname - {surname}. Age: {this.state.years}</h1>
+        <h1>My name is {name},
+            surname - {surname}.
+            Age: {years},
+            position: {position}</h1>
         <a href={link}>My profile</a>
+        <form>
+          <span>Input Position:</span>
+          <input type="text" onChange={(e) => this.commitInputChanges(e, 'Some params')} />
+        </form>
       </div>
     )
   }
