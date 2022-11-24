@@ -13,9 +13,9 @@ class App extends Component {
         super(props);
         this.state = {
             data: [
-                {name: 'John Abraham', salary: 300, increase: false, id: 1},
-                {name: 'Arnold Hey', salary: 100, increase: true, id: 2},
-                {name: 'Ryan Raynolds', salary: 600, increase: false, id: 3}
+                {name: 'John Abraham', salary: 300, increase: false, rise: true, id: 1},
+                {name: 'Arnold Hey', salary: 100, increase: true, rise: false, id: 2},
+                {name: 'Ryan Raynolds', salary: 600, increase: false, rise: false, id: 3}
             ]
         };
         this.maxID = 4;
@@ -32,7 +32,7 @@ class App extends Component {
                 data: data.filter(elem => elem.id !== id)
             }
         })
-        console.log(id);
+        console.log(`#${id} deleted`);
     }
 
     addItem = (name, salary) => {
@@ -40,6 +40,7 @@ class App extends Component {
             name: name,
             salary: salary,
             increase: false,
+            rise: false,
             id: this.maxID++
         }
         this.setState(({data}) => {
@@ -50,17 +51,42 @@ class App extends Component {
         })
     }
 
+    onToggleProp = (id, prop) => {
+        // this.setState(({data}) => {
+        //     const index = data.findIndex(elem => elem.id === id);
+        //     const old = data[index],
+        //           newItem = {...old, increase: !old.increase},
+        //           newData = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+        //     return {
+        //         data: newData
+        //     }
+        // })
+        this.setState(({data}) => ({
+            data: data.map(item => {
+                if (item.id === id) {
+                    return {...item, [prop]: !item[prop]}
+                }
+                return item;
+            })
+        }))
+    }
+
     render() {
+        const employeesTotal = this.state.data.length,
+              employeesToIncrease = this.state.data.filter(item => item.increase).length;
         return (
             <div className="app">
-                <AppInfo />
+                <AppInfo 
+                    employees={employeesTotal} 
+                    increased={employeesToIncrease} />
                 <div className="search-panel">
                     <SearchPanel />
                     <AppFilter />
                 </div>
                 <EmployeesList 
                     data={this.state.data} 
-                    onDelete={this.deleteItem} />
+                    onDelete={this.deleteItem} 
+                    onToggleProp={this.onToggleProp} />
                 <EmployeesAddForm 
                     onAdd={this.addItem} />
             </div>
