@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import './employees-add-form.css';
 
 class EmployeesAddForm extends Component {
@@ -16,13 +16,22 @@ class EmployeesAddForm extends Component {
         })
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.onAdd(this.state.name, this.state.salary);
+        // this.setState({  // I'm not sure if the following four lines are need to be uncommented
+        //     name: '',
+        //     salary: ''
+        // })
+    }
+
     render() {
         const {name, salary} = this.state;
         return (
             <div className="app-add-form">
                 <h3>Add new employee</h3>
                 <form 
-                    action="" 
+                    onSubmit={this.onSubmit} 
                     className="add-form d-flex">
                         <input 
                             type="text" 

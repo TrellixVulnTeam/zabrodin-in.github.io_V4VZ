@@ -17,7 +17,8 @@ class App extends Component {
                 {name: 'Arnold Hey', salary: 100, increase: true, id: 2},
                 {name: 'Ryan Raynolds', salary: 600, increase: false, id: 3}
             ]
-        }
+        };
+        this.maxID = 4;
     };
 
     deleteItem = (id) => {
@@ -34,6 +35,21 @@ class App extends Component {
         console.log(id);
     }
 
+    addItem = (name, salary) => {
+        const newEmployeeItem = {
+            name: name,
+            salary: salary,
+            increase: false,
+            id: this.maxID++
+        }
+        this.setState(({data}) => {
+            let newArray = [...data, newEmployeeItem];
+            return {
+                data: newArray
+            }
+        })
+    }
+
     render() {
         return (
             <div className="app">
@@ -45,7 +61,8 @@ class App extends Component {
                 <EmployeesList 
                     data={this.state.data} 
                     onDelete={this.deleteItem} />
-                <EmployeesAddForm />
+                <EmployeesAddForm 
+                    onAdd={this.addItem} />
             </div>
         )
     };
